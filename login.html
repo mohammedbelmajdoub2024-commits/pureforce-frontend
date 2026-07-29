@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PureForce Bleach | Login</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap"
+    rel="stylesheet" />
+  <style>
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg-dark: #030712;
+      --bg-card: #0d1117;
+      --bg-glass: rgba(255, 255, 255, 0.04);
+      --blue-600: #0077b6;
+      --blue-400: #00b4d8;
+      --cyan: #00f5ff;
+      --white: #ffffff;
+      --gray-400: #94a3b8;
+      --gray-600: #475569;
+      --radius-lg: 24px;
+      --transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg-dark);
+      color: var(--white);
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Background glow effects */
+    body::before {
+      content: '';
+      position: absolute;
+      top: 20%;
+      left: 10%;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(0, 180, 216, 0.15) 0%, transparent 70%);
+      filter: blur(60px);
+      z-index: 0;
+    }
+
+    body::after {
+      content: '';
+      position: absolute;
+      bottom: 10%;
+      right: 10%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(0, 245, 255, 0.1) 0%, transparent 70%);
+      filter: blur(80px);
+      z-index: 0;
+    }
+
+    .login-container {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      max-width: 420px;
+      background: var(--bg-glass);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius-lg);
+      padding: 48px;
+      box-shadow: 0 24px 64px rgba(0, 0, 0, 0.4);
+      animation: fadeUp 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .logo {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .logo h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 2.2rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--cyan), var(--blue-400));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: -0.5px;
+    }
+
+    .logo p {
+      color: var(--gray-400);
+      font-size: 0.9rem;
+      margin-top: 8px;
+    }
+
+    .form-group {
+      margin-bottom: 24px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--gray-400);
+      margin-bottom: 8px;
+    }
+
+    .form-group input {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1.5px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 14px 18px;
+      color: var(--white);
+      font-size: 0.95rem;
+      font-family: 'Inter', sans-serif;
+      transition: var(--transition);
+      outline: none;
+    }
+
+    .form-group input::placeholder {
+      color: var(--gray-600);
+    }
+
+    .form-group input:focus {
+      border-color: var(--cyan);
+      box-shadow: 0 0 0 3px rgba(0, 245, 255, 0.1);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .btn-login {
+      width: 100%;
+      background: linear-gradient(135deg, var(--blue-600), var(--blue-400));
+      color: var(--white);
+      border: none;
+      padding: 16px;
+      border-radius: 14px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 8px 24px rgba(0, 180, 216, 0.3);
+      transition: var(--transition);
+      letter-spacing: 0.5px;
+      margin-top: 10px;
+    }
+
+    .btn-login:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(0, 180, 216, 0.45);
+    }
+
+    .footer-text {
+      text-align: center;
+      margin-top: 24px;
+      font-size: 0.85rem;
+      color: var(--gray-400);
+    }
+
+    .footer-text a {
+      color: var(--cyan);
+      text-decoration: none;
+      font-weight: 600;
+      transition: var(--transition);
+    }
+
+    .footer-text a:hover {
+      color: var(--blue-400);
+      text-decoration: underline;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="login-container">
+    <div class="logo">
+      <h1>💧 PureForce</h1>
+      <p id="logo-subtitle">Sign in to access your storefront</p>
+    </div>
+
+    <form id="loginForm">
+      <div class="form-group" id="username-group" style="display: none;">
+        <label for="username">Username</label>
+        <input type="text" id="username" placeholder="Your Name" />
+      </div>
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" placeholder="you@example.com" required />
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" placeholder="••••••••" required />
+      </div>
+      <button type="submit" class="btn-login" id="submit-btn">Sign In</button>
+    </form>
+
+    <div class="footer-text">
+      <span id="toggle-text">Don't have an account?</span> <a href="#" id="toggle-btn">Create one</a>
+    </div>
+  </div>
+
+  <!-- Firebase Auth Integration -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+
+    // TODO: Replace with your actual Firebase project configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyAcCydEXn6GeAu9gN3AI1CcINfnIR9siNY",
+      authDomain: "pureforce-bleach.firebaseapp.com",
+      projectId: "pureforce-bleach",
+      storageBucket: "pureforce-bleach.firebasestorage.app",
+      messagingSenderId: "409756547445",
+      appId: "1:409756547445:web:79a645200e430a734a3b3c",
+      measurementId: "G-X1S812MF19"
+    };
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    const loginForm = document.getElementById('loginForm');
+    const usernameGroup = document.getElementById('username-group');
+    const usernameInput = document.getElementById('username');
+    const emailInput = document.getElementById('email');
+    const passwordInput = document.getElementById('password');
+    const submitBtn = document.getElementById('submit-btn');
+    const logoSubtitle = document.getElementById('logo-subtitle');
+    const toggleText = document.getElementById('toggle-text');
+    const toggleBtn = document.getElementById('toggle-btn');
+
+    let isRegisterMode = false;
+
+    // Toggle between Login and Register modes
+    toggleBtn.addEventListener('click', function (e) {
+      e.preventDefault();
+      clearError();
+      isRegisterMode = !isRegisterMode;
+
+      if (isRegisterMode) {
+        usernameGroup.style.display = 'block';
+        usernameInput.required = true;
+        logoSubtitle.textContent = 'Create a new account';
+        submitBtn.textContent = 'Sign Up';
+        toggleText.textContent = 'Already have an account?';
+        toggleBtn.textContent = 'Sign In';
+      } else {
+        usernameGroup.style.display = 'none';
+        usernameInput.required = false;
+        usernameInput.value = '';
+        logoSubtitle.textContent = 'Sign in to access your storefront';
+        submitBtn.textContent = 'Sign In';
+        toggleText.textContent = "Don't have an account?";
+        toggleBtn.textContent = 'Create one';
+      }
+    });
+
+    // Helper to show/clear error messages
+    function showError(msg, isSuccess = false) {
+      let el = document.getElementById('error-msg');
+      if (!el) {
+        el = document.createElement('p');
+        el.id = 'error-msg';
+        document.getElementById('loginForm').appendChild(el);
+      }
+      el.style.cssText = `font-size:0.85rem;margin-top:12px;text-align:center;font-weight:600;color:${isSuccess ? '#00ff88' : '#ff4d6d'}`;
+      el.textContent = msg;
+    }
+
+    function clearError() {
+      const el = document.getElementById('error-msg');
+      if (el) el.remove();
+    }
+
+    loginForm.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      clearError();
+
+      const email = emailInput.value.trim();
+      const password = passwordInput.value;
+      const username = usernameInput.value.trim();
+
+      submitBtn.disabled = true;
+      const originalText = submitBtn.textContent;
+      submitBtn.textContent = isRegisterMode ? 'Creating account...' : 'Signing in...';
+      submitBtn.style.opacity = '0.8';
+
+      try {
+        if (isRegisterMode) {
+          // Firebase Register
+          const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+          await updateProfile(userCredential.user, { displayName: username });
+          showError('✅ Registration successful! Please sign in.', true);
+          // Auto toggle back to login mode
+          toggleBtn.click();
+          passwordInput.value = ''; // clear password
+        } else {
+          // Firebase Login
+          const userCredential = await signInWithEmailAndPassword(auth, email, password);
+          // Firebase handles the session automatically. 
+          // We can optionally store basic info, but not needed for auth.
+          localStorage.setItem('user_name', userCredential.user.displayName || 'User');
+
+          // Redirect to index.html
+          window.location.href = 'index.html';
+        }
+      } catch (err) {
+        showError(`❌ ${err.message}`);
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalText;
+        submitBtn.style.opacity = '1';
+      }
+    });
+  </script>
+</body>
+
+</html>
