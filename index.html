@@ -1520,8 +1520,13 @@
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
 
+  // Track the current user — populated by onAuthStateChanged to avoid
+  // the race condition where auth.currentUser is null during init.
+  let currentUser = null;
+
   // Auth Guard
   onAuthStateChanged(auth, (user) => {
+    currentUser = user;
     if (!user) {
       window.location.href = 'login.html';
     } else {
@@ -1594,7 +1599,7 @@
     chatInput.value = '';
     chatMessages.scrollTop = chatMessages.scrollHeight;
 
-    const user = auth.currentUser;
+    const user = currentUser;
     if (!user) {
       chatMessages.innerHTML += `<div style='margin-bottom:12px; color:#ff6b6b;'><span style='background:#361515; padding:8px 12px; border-radius:12px; display:inline-block;'>Error: You must be logged in to chat.</span></div>`;
       chatMessages.scrollTop = chatMessages.scrollHeight;
@@ -1635,7 +1640,7 @@
   document.getElementById('checkout-form').addEventListener('submit', async function(e) {
     e.preventDefault();
     const btn = document.getElementById('checkout-submit');
-    const user = auth.currentUser;
+    const user = currentUser;
     if (!user) {
       alert("Please log in to complete your order.");
       window.location.href = 'login.html';
