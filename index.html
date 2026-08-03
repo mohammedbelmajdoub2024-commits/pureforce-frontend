@@ -1593,7 +1593,7 @@
   chatSend.addEventListener('click', async () => {
     const text = chatInput.value.trim();
     if (!text) return;
-    
+
     // Add user message to UI
     chatMessages.innerHTML += `<div style='margin-bottom:12px; text-align:right;'><span style='background:#2a3645; padding:8px 12px; border-radius:12px; display:inline-block;'><b>You:</b> ${text}</span></div>`;
     chatInput.value = '';
@@ -1601,10 +1601,16 @@
 
     const user = currentUser;
     if (!user) {
-      chatMessages.innerHTML += `<div style='margin-bottom:12px; color:#ff6b6b;'><span style='background:#361515; padding:8px 12px; border-radius:12px; display:inline-block;'>Error: You must be logged in to chat.</span></div>`;
+      chatMessages.innerHTML += `<div style='margin-bottom:12px; color:#ff6b6b;'><span style='background:#361515; padding:8px 12px; border-radius:12px; display:inline-block;'>Please log in to use the chat.</span></div>`;
       chatMessages.scrollTop = chatMessages.scrollHeight;
       return;
     }
+
+    // Show typing indicator
+    const typingId = 'typing-' + Date.now();
+    chatMessages.innerHTML += `<div id="${typingId}" style='margin-bottom:12px; color:#94a3b8;'><span style='background:#1e293b; padding:8px 12px; border-radius:12px; display:inline-block;'>PureForce AI is typing...</span></div>`;
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+    chatSend.disabled = true;
 
     try {
       const token = await user.getIdToken();
@@ -1612,27 +1618,28 @@
 
       const resp = await fetch(`${API_BASE_URL}/generate`, {
         method: 'POST',
-        headers: { 
+        headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`
         },
-        body: JSON.stringify({ 
+        body: JSON.stringify({
           session_id: sessionId,
-          prompt: text 
+          prompt: text
         })
       });
 
       const data = await resp.json();
+      if (!resp.ok) throw new Error(data.detail || 'Failed to generate response');
 
-      if (!resp.ok) {
-        throw new Error(data.detail || 'Failed to generate response');
-      }
-
+      document.getElementById(typingId)?.remove();
       chatMessages.innerHTML += `<div style='margin-bottom:12px; color:#34d399;'><span style='background:#102a22; padding:8px 12px; border-radius:12px; display:inline-block;'><b>PureForce AI:</b> ${data.response}</span></div>`;
       chatMessages.scrollTop = chatMessages.scrollHeight;
     } catch (e) {
+      document.getElementById(typingId)?.remove();
       chatMessages.innerHTML += `<div style='margin-bottom:12px; color:#ff6b6b;'><span style='background:#361515; padding:8px 12px; border-radius:12px; display:inline-block;'>Error: ${e.message}</span></div>`;
       chatMessages.scrollTop = chatMessages.scrollHeight;
+    } finally {
+      chatSend.disabled = false;
     }
   });
 
