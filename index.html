@@ -1503,6 +1503,19 @@
     </div>
   </div>
 </div>
+<!-- Order History Modal -->
+<div id="orders-modal" style="display:none; position:fixed; inset:0; background:rgba(3,7,18,0.85); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); z-index:10000; justify-content:center; align-items:center; padding:20px;">
+  <div style="background:#0d1117; border:1px solid rgba(0,245,255,0.25); border-radius:20px; width:100%; max-width:600px; max-height:80vh; display:flex; flex-direction:column; overflow:hidden; box-shadow:0 24px 64px rgba(0,0,0,0.5);">
+    <div style="background:linear-gradient(135deg,#0077b6,#00b4d8); padding:20px; display:flex; justify-content:space-between; align-items:center; color:white; border-bottom:1px solid rgba(0,245,255,0.2);">
+      <h2 style="font-family:'Outfit', sans-serif; font-size:1.4rem; margin:0; display:flex; align-items:center; gap:10px;">🛒 My Order History</h2>
+      <span id="orders-modal-close" style="cursor:pointer; font-size:1.2rem; font-weight:bold; transition:color 0.2s;" onmouseover="this.style.color='#00f5ff'" onmouseout="this.style.color='white'">✖</span>
+    </div>
+    <div id="orders-modal-content" style="flex:1; padding:24px; overflow-y:auto; color:#e0e0e0; font-family:'Inter', sans-serif;">
+      <div style="text-align:center; padding:40px; color:#94a3b8;">Loading orders...</div>
+    </div>
+  </div>
+</div>
+
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
   import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
@@ -1530,7 +1543,7 @@
     if (!user) {
       window.location.href = 'login.html';
     } else {
-      // Add logout button with user email
+      // Add logout & orders button with user email
       const logoutBtn = document.createElement('div');
       logoutBtn.style.cssText = `
         position: fixed; top: 16px; right: 20px; z-index: 9999;
@@ -1542,6 +1555,13 @@
       `;
       logoutBtn.innerHTML = `
         <span>👤 ${user.email}</span>
+        <button id="orders-btn" style="
+          background: rgba(255, 255, 255, 0.1);
+          border: 1px solid rgba(255,255,255,0.2);
+          color: white; padding: 4px 12px;
+          border-radius: 20px; cursor: pointer; font-size: 0.78rem; font-weight: 600;
+          transition: background 0.2s;
+        " onmouseover="this.style.background='rgba(255,255,255,0.2)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'">My Orders</button>
         <button id="logout-btn" style="
           background: linear-gradient(135deg,#0077b6,#00b4d8);
           border: none; color: white; padding: 4px 12px;
@@ -1550,6 +1570,7 @@
       `;
       document.body.appendChild(logoutBtn);
       document.getElementById('logout-btn').addEventListener('click', () => signOut(auth).then(() => window.location.href = 'login.html'));
+      document.getElementById('orders-btn').addEventListener('click', openOrdersModal);
     }
   });
 
@@ -1703,6 +1724,78 @@
       btn.disabled = false;
     }
   });
+
+  // Orders Modal control
+  const ordersModal = document.getElementById('orders-modal');
+  const ordersClose = document.getElementById('orders-modal-close');
+  const ordersContent = document.getElementById('orders-modal-content');
+
+  ordersClose.addEventListener('click', () => {
+    ordersModal.style.display = 'none';
+  });
+
+  ordersModal.addEventListener('click', (e) => {
+    if (e.target === ordersModal) ordersModal.style.display = 'none';
+  });
+
+  async function openOrdersModal() {
+    ordersModal.style.display = 'flex';
+    ordersContent.innerHTML = `<div style="text-align:center; padding:40px; color:#94a3b8;">⏳ Loading your orders...</div>`;
+    
+    try {
+      const token = await currentUser.getIdToken();
+      const resp = await fetch(`${API_BASE_URL}/orders`, {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+      
+      if (!resp.ok) throw new Error('Failed to retrieve orders');
+      
+      const orders = await resp.json();
+      
+      if (orders.length === 0) {
+        ordersContent.innerHTML = `
+          <div style="text-align:center; padding:40px; color:#94a3b8;">
+            <p style="font-size:1.1rem; margin-bottom:10px;">📦 No orders found</p>
+            <p style="font-size:0.85rem;">Items you purchase will show up here.</p>
+          </div>`;
+        return;
+      }
+      
+      let html = '';
+      orders.forEach(order => {
+        const date = new Date(order.created_at).toLocaleString();
+        const price = (order.quantity * 14.99).toFixed(2);
+        html += `
+          <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:12px; padding:16px; margin-bottom:12px; transition:border-color 0.2s;">
+            <div style="display:flex; justify-content:space-between; margin-bottom:8px; border-bottom:1px solid rgba(255,255,255,0.05); padding-bottom:8px;">
+              <span style="font-weight:bold; color:var(--cyan);">Order #${order.id}</span>
+              <span style="font-size:0.75rem; color:#94a3b8;">${date}</span>
+            </div>
+            <div style="display:grid; grid-template-columns:1fr 100px; gap:10px; font-size:0.9rem;">
+              <div>
+                <p><b>Product:</b> ${order.product}</p>
+                <p><b>Quantity:</b> ${order.quantity} bottle(s)</p>
+                <p style="font-size:0.8rem; color:#94a3b8; margin-top:4px;"><b>Deliver to:</b> ${order.address}</p>
+              </div>
+              <div style="text-align:right; font-weight:bold; font-size:1.1rem; color:var(--accent-green); display:flex; align-items:center; justify-content:flex-end;">
+                $${price}
+              </div>
+            </div>
+          </div>
+        `;
+      });
+      ordersContent.innerHTML = html;
+    } catch (err) {
+      ordersContent.innerHTML = `
+        <div style="text-align:center; padding:40px; color:#ff4d6d;">
+          <p>❌ Error loading orders</p>
+          <p style="font-size:0.85rem; margin-top:8px;">${err.message}</p>
+        </div>`;
+    }
+  }
 </script>
 </body>
 </html>
