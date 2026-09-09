@@ -823,6 +823,7 @@
       .payment-methods { flex-direction: column; }
     }
   </style>
+<base target="_blank">
 </head>
 <body>
 
@@ -1575,7 +1576,7 @@
   });
 
   // Set this to your deployed backend URL when hosting on Netlify (e.g., https://your-backend.onrender.com)
- cconst API_BASE_URL = 'https://pureforcebackend1-yizuulug.b4a.run';
+ const API_BASE_URL = 'https://pureforcebackend1-yizuulug.b4a.run';
   const chatBtn = document.getElementById('ai-chat-btn');
   const chatBox = document.getElementById('ai-chat-box');
   const chatClose = document.getElementById('ai-chat-close');
@@ -1766,7 +1767,9 @@
       let html = '';
       orders.forEach(order => {
         const date = new Date(order.created_at).toLocaleString();
-        const price = (order.quantity * 14.99).toFixed(2);
+        const unitPrice = prices[order.product] !== undefined ? prices[order.product] : 14.99;
+        const disc = discounts[order.quantity] || 0;
+        const price = (unitPrice * order.quantity * (1 - disc)).toFixed(2);
         html += `
           <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:12px; padding:16px; margin-bottom:12px; transition:border-color 0.2s;">
             <div style="display:flex; justify-content:space-between; margin-bottom:8px; border-bottom:1px solid rgba(255,255,255,0.05); padding-bottom:8px;">
@@ -1775,7 +1778,7 @@
             </div>
             <div style="display:grid; grid-template-columns:1fr 100px; gap:10px; font-size:0.9rem;">
               <div>
-                <p><b>Product:</b> ${order.product}</p>
+                <p><b>Product:</b> PureForce ${order.product.charAt(0).toUpperCase() + order.product.slice(1)}</p>
                 <p><b>Quantity:</b> ${order.quantity} bottle(s)</p>
                 <p style="font-size:0.8rem; color:#94a3b8; margin-top:4px;"><b>Deliver to:</b> ${order.address}</p>
               </div>
