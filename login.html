@@ -327,7 +327,7 @@ const response = await fetch('https://pureforcebackend1-ggbydhy3.b4a.run/login',
     'Content-Type': 'application/json'
   },
   body: JSON.stringify({
-    email: email,
+    email: email.toLowerCase(),
     password: password
   })
 });
