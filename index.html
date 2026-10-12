@@ -1158,9 +1158,9 @@
   <section id="checkout">
     <div class="checkout-inner">
       <div class="checkout-header fade-up">
-        <div class="section-tag" style="margin:0 auto 16px">✦ Secure Checkout</div>
+        <div class="section-tag" style="margin:0 auto 16px">✦ Order Request</div>
         <h2 class="section-title">Complete Your <span style="background:linear-gradient(135deg,#00f5ff,#00b4d8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Order</span></h2>
-        <p class="section-sub">Fast, secure checkout. Your payment is encrypted and protected.</p>
+        <p class="section-sub">Submit your order details. We’ll contact you to confirm payment and delivery.</p>
       </div>
 
       <form class="checkout-form fade-up" id="checkout-form" novalidate>
@@ -1225,70 +1225,21 @@
           </div>
         </div>
 
-        <!-- Payment -->
-        <div class="form-section-label" style="margin-top:8px">Payment Method</div>
-        <div class="payment-methods">
-          <label class="payment-method active" id="pm-card">
-            <input type="radio" name="paymethod" value="card" checked />
-            <div class="pm-logo">💳</div>
-            <div class="pm-name">Card</div>
-          </label>
-          <label class="payment-method" id="pm-visa">
-            <input type="radio" name="paymethod" value="visa" />
-            <div class="pm-logo" style="font-style:italic;color:#fff;background:#1a1f71;padding:4px 10px;border-radius:6px;font-size:1rem">VISA</div>
-            <div class="pm-name">Visa</div>
-          </label>
-          <label class="payment-method" id="pm-mc">
-            <input type="radio" name="paymethod" value="mastercard" />
-            <div class="pm-logo">🔴🟡</div>
-            <div class="pm-name">Mastercard</div>
-          </label>
-        </div>
-
-        <div class="form-row single" style="margin-bottom:16px">
-          <div class="form-group">
-            <label for="cf-cardname">Name on Card</label>
-            <input type="text" id="cf-cardname" placeholder="As it appears on your card" required />
-          </div>
-        </div>
-        <div class="form-row single" style="margin-bottom:16px">
-          <div class="form-group">
-            <label for="cf-cardnum">Card Number</label>
-            <div class="card-input-wrap">
-              <input type="text" id="cf-cardnum" placeholder="1234 5678 9012 3456" maxlength="19" required />
-              <div class="card-icons">
-                <span class="card-icon visa">VISA</span>
-                <span class="card-icon mc"></span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label for="cf-expiry">Expiry Date</label>
-            <input type="text" id="cf-expiry" placeholder="MM / YY" maxlength="7" required />
-          </div>
-          <div class="form-group">
-            <label for="cf-cvv">CVV / CVC</label>
-            <input type="text" id="cf-cvv" placeholder="•••" maxlength="4" required />
-          </div>
-        </div>
+        <!-- Payment will be arranged after order confirmation -->
+        <div class="form-section-label" style="margin-top:8px">Payment</div>
+        <p class="section-sub" style="margin:0 0 18px">We’ll contact you to confirm payment and delivery. Do not enter card details here.</p>
 
         <!-- Order Total -->
         <div class="checkout-total">
-          <div class="total-label">Order Total</div>
+          <div class="total-label">Estimated Total</div>
           <div class="total-amount" id="order-total">$8.99</div>
         </div>
 
         <button type="submit" class="btn-checkout" id="checkout-submit">
-          🔒 Place Secure Order
+          Submit Order
         </button>
 
-        <div class="secure-badges">
-          <div class="secure-badge"><span>🔒</span> SSL Encrypted</div>
-          <div class="secure-badge"><span>✅</span> 30-Day Returns</div>
-          <div class="secure-badge"><span>🚚</span> Free Shipping</div>
-          <div class="secure-badge"><span>🏅</span> 100% Genuine</div>
+        <p class="section-sub" style="text-align:center;margin-top:14px">Your order is a request; payment is arranged after we confirm it.</p>
         </div>
       </form>
     </div>
@@ -1457,34 +1408,8 @@
       });
     });
 
-    // Payment method selector
-    document.querySelectorAll('.payment-method').forEach(pm => {
-      pm.addEventListener('click', () => {
-        document.querySelectorAll('.payment-method').forEach(p => p.classList.remove('active'));
-        pm.classList.add('active');
-      });
-    });
-
-    // Qty change
+    // Qty change    // Qty change
     document.getElementById('cf-qty').addEventListener('change', updateTotal);
-
-    // Card number formatting
-    document.getElementById('cf-cardnum').addEventListener('input', function() {
-      let val = this.value.replace(/\D/g,'').substring(0,16);
-      this.value = val.replace(/(\d{4})/g,'$1 ').trim();
-    });
-
-    // Expiry formatting
-    document.getElementById('cf-expiry').addEventListener('input', function() {
-      let val = this.value.replace(/\D/g,'').substring(0,4);
-      if (val.length >= 3) val = val.substring(0,2) + ' / ' + val.substring(2);
-      this.value = val;
-    });
-
-    // CVV numbers only
-    document.getElementById('cf-cvv').addEventListener('input', function() {
-      this.value = this.value.replace(/\D/g,'').substring(0,4);
-    });
 
   </script>
 <!-- Floating AI Chat Widget -->
