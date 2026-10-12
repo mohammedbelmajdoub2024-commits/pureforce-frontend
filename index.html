@@ -1570,13 +1570,18 @@
         ">Logout</button>
       `;
       document.body.appendChild(logoutBtn);
-      document.getElementById('logout-btn').addEventListener('click', () => signOut(auth).then(() => window.location.href = 'login.html'));
+      document.getElementById('logout-btn').addEventListener('click', () => { localStorage.removeItem('access_token'); signOut(auth).then(() => window.location.href = 'login.html'); });
       document.getElementById('orders-btn').addEventListener('click', openOrdersModal);
     }
   });
 
   // Set this to your deployed backend URL when hosting on Netlify (e.g., https://your-backend.onrender.com)
  const API_BASE_URL = 'https://pureforcebackend1-8nz9lv60.b4a.run';
+  async function getApiToken(user) {
+    const token = localStorage.getItem('access_token');
+    if (!token) throw new Error('Please sign in again to continue.');
+    return token;
+  }
   const chatBtn = document.getElementById('ai-chat-btn');
   const chatBox = document.getElementById('ai-chat-box');
   const chatClose = document.getElementById('ai-chat-close');
@@ -1634,7 +1639,7 @@
     chatSend.disabled = true;
 
     try {
-      const token = await user.getIdToken();
+      const token = await getApiToken(user);
       const sessionId = getOrCreateSessionId();
 
       const resp = await fetch(`${API_BASE_URL}/generate`, {
@@ -1743,7 +1748,7 @@
     ordersContent.innerHTML = `<div style="text-align:center; padding:40px; color:#94a3b8;">⏳ Loading your orders...</div>`;
     
     try {
-      const token = await currentUser.getIdToken();
+      const token = await getApiToken(currentUser);
       const resp = await fetch(`${API_BASE_URL}/orders`, {
         method: 'GET',
         headers: {
