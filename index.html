@@ -1246,7 +1246,7 @@
   </section>
 
   <!-- Toast notification -->
-  <div class="toast" id="order-toast">🎉 Order Placed! We'll confirm via email shortly.</div>
+  <div class="toast" id="order-toast">✅ Order request received. We’ll contact you to confirm payment and delivery.</div>
 
   <!-- FOOTER -->
   <footer>
@@ -1608,11 +1608,12 @@
     // Get input values
     const firstname = document.getElementById('cf-firstname').value.trim();
     const lastname = document.getElementById('cf-lastname').value.trim();
+    const email = document.getElementById('cf-email').value.trim();
     const phone = document.getElementById('cf-phone').value.trim();
     const qty = parseInt(document.getElementById('cf-qty').value);
     const address = document.getElementById('cf-address') ? document.getElementById('cf-address').value.trim() : 'Storefront Checkout';
 
-    if (!firstname || !lastname || !phone || !address) {
+    if (!firstname || !lastname || !email || !phone || !address) {
       alert("Please fill in all required fields.");
       return;
     }
@@ -1621,7 +1622,7 @@
     btn.disabled = true;
 
     try {
-      const token = await user.getIdToken();
+      const token = await getApiToken(user);
       const resp = await fetch(`${API_BASE_URL}/order`, {
         method: 'POST',
         headers: {
@@ -1630,7 +1631,7 @@
         },
         body: JSON.stringify({
           name: `${firstname} ${lastname}`,
-          email: user.email,
+          email: email,
           phone: phone,
           product: selectedProduct,
           quantity: qty,
@@ -1643,14 +1644,14 @@
         throw new Error(errorData.detail || 'Failed to place order');
       }
 
-      btn.textContent = '✅ Order Confirmed!';
+      btn.textContent = '✅ Request Received';
       btn.style.background = 'linear-gradient(135deg,#059669,#10b981)';
       const toast = document.getElementById('order-toast');
       toast.classList.add('show');
       setTimeout(() => toast.classList.remove('show'), 4500);
     } catch (err) {
       alert(`❌ Error placing order: ${err.message}`);
-      btn.textContent = '🔒 Place Secure Order';
+      btn.textContent = 'Submit Order';
       btn.disabled = false;
     }
   });
