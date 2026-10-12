@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 800" role="img" aria-labelledby="title desc">
+<title id="title">PureForce Original bleach bottle</title><desc id="desc">A clean white bottle with cyan cap and PureForce label on a transparent background.</desc>
+<defs>
+ <linearGradient id="body" x1="115" y1="140" x2="492" y2="705" gradientUnits="userSpaceOnUse"><stop stop-color="#fff"/><stop offset=".47" stop-color="#eef9fb"/><stop offset=".8" stop-color="#cfe8ee"/><stop offset="1" stop-color="#f8ffff"/></linearGradient>
+ <linearGradient id="side" x1="414" y1="263" x2="485" y2="650" gradientUnits="userSpaceOnUse"><stop stop-color="#b9e7ef" stop-opacity=".2"/><stop offset="1" stop-color="#62b7d1" stop-opacity=".6"/></linearGradient>
+ <linearGradient id="cap" x1="247" y1="76" x2="363" y2="184" gradientUnits="userSpaceOnUse"><stop stop-color="#4beeff"/><stop offset=".5" stop-color="#00a9ce"/><stop offset="1" stop-color="#006eb4"/></linearGradient>
+ <linearGradient id="label" x1="137" y1="320" x2="466" y2="522" gradientUnits="userSpaceOnUse"><stop stop-color="#034b83"/><stop offset=".58" stop-color="#087eb8"/><stop offset="1" stop-color="#11bfd3"/></linearGradient>
+ <filter id="shadow" x="38" y="24" width="524" height="760" filterUnits="userSpaceOnUse"><feGaussianBlur stdDeviation="19"/></filter>
+</defs>
+<ellipse cx="302" cy="730" rx="178" ry="27" fill="#03233d" opacity=".22" filter="url(#shadow)"/>
+<!-- cap -->
+<path d="M247 72c0-12 10-22 22-22h62c12 0 22 10 22 22v79H247V72Z" fill="url(#cap)"/>
+<path d="M258 66h84M258 82h84M258 98h84M258 114h84M258 130h84" stroke="#c8fbff" stroke-opacity=".38" stroke-width="4"/>
+<path d="M226 148h150v49H226z" rx="13" fill="#eafaff" stroke="#9bddeb" stroke-width="5"/>
+<!-- neck and handle -->
+<path d="M211 176h180v81H211z" fill="url(#body)"/>
+<path d="M361 192h69c44 0 74 30 74 72v54h-53v-46c0-13-8-21-23-21h-67v-59Z" fill="url(#body)" stroke="#d8edf1" stroke-width="7"/>
+<path d="M410 218h26c16 0 27 11 27 27v29h-34v-18c0-6-3-9-9-9h-10v-29Z" fill="#6cc9dc" opacity=".19"/>
+<!-- main bottle body -->
+<path d="M179 229h242c41 0 70 31 70 73v337c0 53-39 92-92 92H198c-53 0-92-39-92-92V302c0-42 30-73 73-73Z" fill="url(#body)" stroke="#c7e2e9" stroke-width="7"/>
+<path d="M417 251c25 8 41 28 41 58v330c0 40-24 67-61 78 22-47 23-380 20-466Z" fill="url(#side)"/>
+<path d="M151 284c14-24 31-31 56-32-14 81-17 296-3 436-33-7-53-34-53-70V302c0-7 0-13 0-18Z" fill="#fff" opacity=".75"/>
+<!-- label -->
+<path d="M119 339c0-15 12-27 27-27h357v216H146c-15 0-27-12-27-27V339Z" fill="url(#label)"/>
+<path d="M119 339c0-15 12-27 27-27h357v13H146c-8 0-14 6-14 14v159c0 8 6 14 14 14h357v14H146c-15 0-27-12-27-27V339Z" fill="#70f1ff" opacity=".55"/>
+<path d="M155 366h42l21 27-21 27h-42l21-27-21-27Z" fill="#76f7ff"/>
+<text x="235" y="399" fill="#fff" font-family="Arial,sans-serif" font-size="42" font-weight="800" letter-spacing="-1">PUREFORCE</text>
+<text x="157" y="457" fill="#d6fbff" font-family="Arial,sans-serif" font-size="22" font-weight="700" letter-spacing="3">POWERFUL CLEAN</text>
+<path d="M157 474h300" stroke="#c8f8ff" stroke-opacity=".55" stroke-width="2"/>
+<text x="157" y="510" fill="#fff" font-family="Arial,sans-serif" font-size="20" font-weight="600">BLEACH · ORIGINAL</text>
+<path d="M157 530h67v36h-67z" rx="18" fill="#d9ffff" opacity=".95"/>
+<text x="171" y="555" fill="#056a9a" font-family="Arial,sans-serif" font-size="16" font-weight="700">99.9%</text>
+<text x="240" y="554" fill="#e8fdff" font-family="Arial,sans-serif" font-size="14">GERM KILLING POWER</text>
+<!-- base ridges -->
+<path d="M166 690h291M171 700h281M179 710h263" stroke="#a4d2dc" stroke-width="4" stroke-linecap="round" opacity=".7"/>
+</svg>
