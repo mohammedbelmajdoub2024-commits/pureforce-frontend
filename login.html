@@ -226,7 +226,7 @@
   <!-- Firebase Auth Integration -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-    import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+    import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile, signOut } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
 
     // TODO: Replace with your actual Firebase project configuration
     const firebaseConfig = {
@@ -361,6 +361,8 @@ localStorage.setItem('user_name', userCredential.user.displayName || 'User');
 window.location.replace('index.html');
         }
       } catch (err) {
+        await signOut(auth).catch(() => {});
+        localStorage.removeItem('access_token');
         showError(`❌ ${err.message}`);
       } finally {
         submitBtn.disabled = false;
