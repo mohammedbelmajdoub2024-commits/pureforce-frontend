@@ -321,7 +321,7 @@
 const userCredential = await signInWithEmailAndPassword(auth, email, password);
 
 // Keep the API account in sync with Firebase. Older accounts may exist only in Firebase.
-const apiUrl = 'https://pureforcebackend1-8nz9lv60.b4a.run';
+const apiUrl = 'https://pureforcebackend1-337eu9y9.b4a.run';
 let response = await fetch(`${apiUrl}/login`, {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
