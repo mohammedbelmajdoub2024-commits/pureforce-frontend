@@ -1463,6 +1463,10 @@
   // the race condition where auth.currentUser is null during init.
   let currentUser = null;
 
+  const escapeHTML = (value) => String(value ?? '').replace(/[&<>"']/g, (char) => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+  }[char]));
+
   // Auth Guard
   onAuthStateChanged(auth, (user) => {
     currentUser = user;
@@ -1480,7 +1484,7 @@
         font-family: 'Inter', sans-serif; font-size: 0.8rem; color: #94a3b8;
       `;
       logoutBtn.innerHTML = `
-        <span>👤 ${user.email}</span>
+        <span>👤 ${escapeHTML(user.email)}</span>
         <button id="orders-btn" style="
           background: rgba(255, 255, 255, 0.1);
           border: 1px solid rgba(255,255,255,0.2);
@@ -1546,7 +1550,7 @@
     if (!text) return;
 
     // Add user message to UI
-    chatMessages.innerHTML += `<div style='margin-bottom:12px; text-align:right;'><span style='background:#2a3645; padding:8px 12px; border-radius:12px; display:inline-block;'><b>You:</b> ${text}</span></div>`;
+    chatMessages.innerHTML += `<div style='margin-bottom:12px; text-align:right;'><span style='background:#2a3645; padding:8px 12px; border-radius:12px; display:inline-block;'><b>You:</b> ${escapeHTML(text)}</span></div>`;
     chatInput.value = '';
     chatMessages.scrollTop = chatMessages.scrollHeight;
 
@@ -1583,11 +1587,11 @@
       if (!resp.ok) throw new Error(data.detail || 'Failed to generate response');
 
       document.getElementById(typingId)?.remove();
-      chatMessages.innerHTML += `<div style='margin-bottom:12px; color:#34d399;'><span style='background:#102a22; padding:8px 12px; border-radius:12px; display:inline-block;'><b>PureForce AI:</b> ${data.response}</span></div>`;
+      chatMessages.innerHTML += `<div style='margin-bottom:12px; color:#34d399;'><span style='background:#102a22; padding:8px 12px; border-radius:12px; display:inline-block;'><b>PureForce AI:</b> ${escapeHTML(data.response)}</span></div>`;
       chatMessages.scrollTop = chatMessages.scrollHeight;
     } catch (e) {
       document.getElementById(typingId)?.remove();
-      chatMessages.innerHTML += `<div style='margin-bottom:12px; color:#ff6b6b;'><span style='background:#361515; padding:8px 12px; border-radius:12px; display:inline-block;'>Error: ${e.message}</span></div>`;
+      chatMessages.innerHTML += `<div style='margin-bottom:12px; color:#ff6b6b;'><span style='background:#361515; padding:8px 12px; border-radius:12px; display:inline-block;'>Error: ${escapeHTML(e.message)}</span></div>`;
       chatMessages.scrollTop = chatMessages.scrollHeight;
     } finally {
       chatSend.disabled = false;
@@ -1704,14 +1708,14 @@
         html += `
           <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:12px; padding:16px; margin-bottom:12px; transition:border-color 0.2s;">
             <div style="display:flex; justify-content:space-between; margin-bottom:8px; border-bottom:1px solid rgba(255,255,255,0.05); padding-bottom:8px;">
-              <span style="font-weight:bold; color:var(--cyan);">Order #${order.id}</span>
-              <span style="font-size:0.75rem; color:#94a3b8;">${date}</span>
+              <span style="font-weight:bold; color:var(--cyan);">Order #${escapeHTML(order.id)}</span>
+              <span style="font-size:0.75rem; color:#94a3b8;">${escapeHTML(date)}</span>
             </div>
             <div style="display:grid; grid-template-columns:1fr 100px; gap:10px; font-size:0.9rem;">
               <div>
-                <p><b>Product:</b> PureForce ${order.product.charAt(0).toUpperCase() + order.product.slice(1)}</p>
-                <p><b>Quantity:</b> ${order.quantity} bottle(s)</p>
-                <p style="font-size:0.8rem; color:#94a3b8; margin-top:4px;"><b>Deliver to:</b> ${order.address}</p>
+                <p><b>Product:</b> PureForce ${escapeHTML(order.product.charAt(0).toUpperCase() + order.product.slice(1))}</p>
+                <p><b>Quantity:</b> ${escapeHTML(order.quantity)} bottle(s)</p>
+                <p style="font-size:0.8rem; color:#94a3b8; margin-top:4px;"><b>Deliver to:</b> ${escapeHTML(order.address)}</p>
               </div>
               <div style="text-align:right; font-weight:bold; font-size:1.1rem; color:var(--accent-green); display:flex; align-items:center; justify-content:flex-end;">
                 $${price}
@@ -1725,7 +1729,7 @@
       ordersContent.innerHTML = `
         <div style="text-align:center; padding:40px; color:#ff4d6d;">
           <p>❌ Error loading orders</p>
-          <p style="font-size:0.85rem; margin-top:8px;">${err.message}</p>
+          <p style="font-size:0.85rem; margin-top:8px;">${escapeHTML(err.message)}</p>
         </div>`;
     }
   }
