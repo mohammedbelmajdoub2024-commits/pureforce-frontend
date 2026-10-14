@@ -93,6 +93,20 @@ dialog::backdrop{background:rgba(0,0,0,.7);backdrop-filter:blur(6px)}
 @media(max-width:1050px){.hero{height:auto;min-height:560px}.hero-content{padding:48px 24px 48px 6.4vw}.hero h1{margin-top:24px}.hero-copy{font-size:17px}.hero-actions{gap:8px;flex-wrap:wrap}.nav-links{margin-right:auto}.feature-card{padding:20px 18px}.ps-name{letter-spacing:.7px}.ps-top{flex-wrap:wrap}.product-footer{flex-wrap:wrap}}
 @media(max-width:700px){nav{padding:0 24px;gap:14px}.nav-logo{font-size:27px}.nav-links{display:none}.nav-cta{width:auto;margin-left:auto;min-height:44px;padding:0 20px}.hero{grid-template-columns:1fr}.hero-content{padding:40px 24px}.hero h1{font-size:58px}.hero h1 em{font-size:66px}.hero-copy{max-width:520px}.hero-image{height:380px}.content-section{padding-left:24px;padding-right:24px}.section-title{font-size:42px}.features-grid,.products-grid,.product-selector{grid-template-columns:1fr}.features-grid,.products-grid{gap:18px}.product-card{min-height:auto;padding-bottom:24px}.product-img{height:200px}.product-footer{flex-wrap:nowrap}.product-info p{min-height:auto}.ps-item{min-height:96px}.checkout-actions{align-items:flex-start;flex-direction:column}.checkout-actions .button{width:100%}.form-row{grid-template-columns:1fr}#checkout .section-title{font-size:42px}#account-controls{padding:0 24px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.reveal{animation:none}*,*::before,*::after{transition:none!important}}
+
+#checkout.motion-visible #checkout-title{animation:checkout-rise .65s ease-out both}
+#checkout.motion-visible .product-selector{animation:checkout-rise .65s .12s ease-out both}
+#checkout.motion-visible .checkout-actions{animation:checkout-rise .65s .24s ease-out both}
+@keyframes checkout-rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+#order-details[open]{animation:checkout-rise .25s ease-out}
+#open-order-details:active,#checkout-submit:active{transform:translateY(1px) scale(.98)}
+.btn-checkout.is-loading::before{content:"";width:16px;height:16px;margin-right:10px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;animation:order-spin .8s linear infinite}
+@keyframes order-spin{to{transform:rotate(360deg)}}
+#checkout-error{color:#ff9aa6;margin:12px 0;overflow-wrap:anywhere}
+.ps-detail{display:block}
+#account-controls{flex-wrap:wrap;overflow-wrap:anywhere;max-width:100%}
+#ai-chat-box{max-width:calc(100vw - 32px)}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}#checkout.motion-visible #checkout-title,#checkout.motion-visible .product-selector,#checkout.motion-visible .checkout-actions,#order-details[open],.btn-checkout.is-loading::before{animation:none}#open-order-details:active,#checkout-submit:active{transform:none}}
 </style>
 
 </head>
@@ -113,7 +127,7 @@ dialog::backdrop{background:rgba(0,0,0,.7);backdrop-filter:blur(6px)}
 <article class="product-card" id="product-original"><img class="product-img" src="assets/product-original.jpg" alt="PureForce Original bottle" loading="lazy"/><div class="product-info"><p class="product-badge">ORIGINAL</p><h3>PureForce Original</h3><p>Follow the directions printed on the container.</p><div class="product-footer"><span class="product-price">$8.99</span><button type="button" id="buy-original" class="btn-buy" data-product="original">Add to Cart</button></div></div></article><article class="product-card" id="product-ultra"><img class="product-img" src="assets/product-ultra.jpg" alt="PureForce Ultra bottle" loading="lazy"/><div class="product-info"><p class="product-badge">ULTRA</p><h3>PureForce Ultra</h3><p>Follow the directions printed on the container.</p><div class="product-footer"><span class="product-price">$14.99</span><button type="button" id="buy-ultra" class="btn-buy" data-product="ultra">Add to Cart</button></div></div></article><article class="product-card" id="product-eco"><img class="product-img" src="assets/product-eco.jpg" alt="PureForce Eco bottle" loading="lazy"/><div class="product-info"><p class="product-badge">ECO</p><h3>PureForce Eco</h3><p>Follow the directions printed on the container.</p><div class="product-footer"><span class="product-price">$11.49</span><button type="button" id="buy-eco" class="btn-buy" data-product="eco">Add to Cart</button></div></div></article>
 </div></section>
 <section id="checkout" class="content-section" aria-labelledby="checkout-title"><p class="eyebrow">✦ &nbsp; ORDER REQUEST</p><h2 id="checkout-title" class="section-title">Complete Your Order</h2><p class="section-sub">Submit your details. Payment and delivery are confirmed separately.</p>
-<form id="checkout-form" novalidate><div class="form-section-label">CHOOSE YOUR PRODUCT</div><div class="product-selector" id="product-selector">
+<form id="checkout-form"><div class="form-section-label">CHOOSE YOUR PRODUCT</div><div class="product-selector" id="product-selector">
 <label class="ps-item active" id="ps-original"><input type="radio" name="product" value="original" checked/><span class="ps-top"><span class="ps-name">PureForce Original</span><span>$8.99</span></span><span class="ps-detail">PureForce Original · $8.99</span></label><label class="ps-item" id="ps-ultra"><input type="radio" name="product" value="ultra" /><span class="ps-top"><span class="ps-name">PureForce Ultra</span><span>$14.99</span></span><span class="ps-detail">PureForce Ultra · $14.99</span></label><label class="ps-item" id="ps-eco"><input type="radio" name="product" value="eco" /><span class="ps-top"><span class="ps-name">PureForce Eco</span><span>$11.49</span></span><span class="ps-detail">PureForce Eco · $11.49</span></label>
 </div><div class="checkout-actions"><p>No card details are collected on this page. Follow product-label instructions.</p><button class="button" type="button" id="open-order-details">Submit Order</button></div>
 <dialog id="order-details" aria-labelledby="details-title"><div class="dialog-header"><h2 id="details-title">Your order details</h2><button type="button" id="close-order-details" class="close-dialog" aria-label="Close order details">×</button></div>        <!-- Personal Info -->
@@ -121,29 +135,29 @@ dialog::backdrop{background:rgba(0,0,0,.7);backdrop-filter:blur(6px)}
         <div class="form-row">
           <div class="form-group">
             <label for="cf-firstname">First Name</label>
-            <input type="text" id="cf-firstname" autocomplete="given-name" placeholder="First name" required />
+            <input type="text" id="cf-firstname" maxlength="120" autocomplete="given-name" placeholder="First name" required />
           </div>
           <div class="form-group">
             <label for="cf-lastname">Last Name</label>
-            <input type="text" id="cf-lastname" autocomplete="family-name" placeholder="Last name" required />
+            <input type="text" id="cf-lastname" maxlength="120" autocomplete="family-name" placeholder="Last name" required />
           </div>
         </div>
         <div class="form-row single">
           <div class="form-group">
             <label for="cf-email">Email Address</label>
-            <input type="email" id="cf-email" autocomplete="email" placeholder="you@example.com" required />
+            <input type="email" id="cf-email" maxlength="255" autocomplete="email" placeholder="you@example.com" required />
           </div>
         </div>
         <div class="form-row single" style="margin-bottom:16px">
           <div class="form-group">
             <label for="cf-address">Shipping Address</label>
-            <input type="text" id="cf-address" autocomplete="street-address" placeholder="Street, city, country" required />
+            <input type="text" id="cf-address" maxlength="2000" autocomplete="street-address" placeholder="Street, city, country" required />
           </div>
         </div>
         <div class="form-row">
           <div class="form-group">
             <label for="cf-phone">Phone Number</label>
-            <input type="tel" id="cf-phone" autocomplete="tel" placeholder="Phone number" required />
+            <input type="tel" id="cf-phone" minlength="3" maxlength="100" autocomplete="tel" placeholder="Phone number" required />
           </div>
           <div class="form-group">
             <label for="cf-qty">Quantity</label>
@@ -156,7 +170,7 @@ dialog::backdrop{background:rgba(0,0,0,.7);backdrop-filter:blur(6px)}
           </div>
         </div>
 
-<div class="checkout-total"><span>Estimated Total</span><span class="total-amount" id="order-total">$8.99</span></div><p class="dialog-note" style="margin-bottom:16px">We'll contact you to confirm payment and delivery. No card details are collected here.</p><button class="btn-checkout" type="submit" id="checkout-submit">Submit Order</button><p class="dialog-note">Your name, email, phone, address, and order details are sent to process this request.</p></dialog>
+<div class="checkout-total"><span>Estimated Total</span><span class="total-amount" id="order-total">$8.99</span></div><p class="dialog-note" style="margin-bottom:16px">We'll contact you to confirm payment and delivery. No card details are collected here.</p><p id="checkout-error" role="alert" hidden></p><button class="btn-checkout" type="submit" id="checkout-submit">Submit Order</button><p class="dialog-note">Your name, email, phone, address, and order details are sent to process this request.</p></dialog>
 </form><p class="copyright">© 2026 PureForce Bleach · Order requests are not payments.</p></section>
 </main><div class="toast" id="order-toast" role="status">Order request received. We'll contact you to confirm payment and delivery.</div>
 <script>
@@ -168,6 +182,8 @@ function selectProduct(value){selectedProduct=value;document.querySelectorAll('.
 document.querySelectorAll('input[name="product"]').forEach(input=>input.addEventListener('change',()=>selectProduct(input.value)));
 document.querySelectorAll('.btn-buy').forEach(button=>button.addEventListener('click',()=>{selectProduct(button.dataset.product);document.getElementById('checkout').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});}));
 document.getElementById('cf-qty').addEventListener('change',updateTotal);
+const checkoutSection=document.getElementById('checkout');
+if('IntersectionObserver' in window){const observer=new IntersectionObserver(entries=>{if(entries.some(entry=>entry.isIntersecting)){checkoutSection.classList.add('motion-visible');observer.disconnect();}},{threshold:.15});observer.observe(checkoutSection);}
 const orderDialog=document.getElementById('order-details');
 document.getElementById('open-order-details').addEventListener('click',()=>orderDialog.showModal());
 document.getElementById('close-order-details').addEventListener('click',()=>orderDialog.close());
@@ -175,27 +191,27 @@ orderDialog.addEventListener('click',event=>{if(event.target===orderDialog){cons
 </script>
 <!-- Floating AI Chat Widget -->
 <div id="ai-chat-widget" style="position:fixed; bottom:20px; right:20px; z-index:9999;">
-  <button id="ai-chat-btn" style="background:#a78bfa; border:none; width:60px; height:60px; border-radius:50%; cursor:pointer; box-shadow:0 8px 24px rgba(0,245,255,0.4); font-size:1.8rem; display:flex; justify-content:center; align-items:center; transition: transform 0.2s;">💬</button>
+  <button id="ai-chat-btn" aria-label="Open PureForce chat" style="background:#a78bfa; border:none; width:60px; height:60px; border-radius:50%; cursor:pointer; box-shadow:0 8px 24px rgba(0,245,255,0.4); font-size:1.8rem; display:flex; justify-content:center; align-items:center; transition: transform 0.2s;">💬</button>
   <div id="ai-chat-box" style="display:none; width:320px; height:400px; background:#0d1117; border:1px solid rgba(0,245,255,0.3); border-radius:12px; position:absolute; bottom:80px; right:0; flex-direction:column; overflow:hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
     <div style="background:#8b72dd; padding:15px; font-weight:bold; color:white; display:flex; justify-content:space-between; align-items:center;">
       <span>PureForce Assistant</span>
-      <span id="ai-chat-close" style="cursor:pointer;">✖</span>
+      <button type="button" aria-label="Close chat" id="ai-chat-close" style="cursor:pointer;">✖</button>
     </div>
     <div id="ai-chat-messages" style="flex:1; padding:15px; overflow-y:auto; font-size:0.9rem; color:#e0e0e0; font-family: 'Inter', sans-serif;">
       <div style='margin-bottom:12px; color:#34d399;'><b>PureForce AI:</b> Hi! I'm your PureForce virtual expert. How can I help you safely use our products today?</div>
     </div>
     <div style="display:flex; border-top:1px solid #333;">
-      <input id="ai-chat-input" type="text" placeholder="Ask about PureForce Bleach..." style="flex:1; border:none; padding:15px; background:#1b2330; color:white; outline:none; font-family: 'Inter', sans-serif;" />
+      <input id="ai-chat-input" aria-label="Message to PureForce assistant" maxlength="4000" type="text" placeholder="Ask about PureForce Bleach..." style="flex:1; border:none; padding:15px; background:#1b2330; color:white; outline:none; font-family: 'Inter', sans-serif;" />
       <button id="ai-chat-send" style="background:#a78bfa; color:#005f73; font-weight:bold; border:none; padding:0 20px; cursor:pointer;">Send</button>
     </div>
   </div>
 </div>
 <!-- Order History Modal -->
-<div id="orders-modal" style="display:none; position:fixed; inset:0; background:rgba(3,7,18,0.85); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); z-index:10000; justify-content:center; align-items:center; padding:20px;">
+<div role="dialog" aria-modal="true" aria-labelledby="orders-title" id="orders-modal" style="display:none; position:fixed; inset:0; background:rgba(3,7,18,0.85); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); z-index:10000; justify-content:center; align-items:center; padding:20px;">
   <div style="background:#0d1117; border:1px solid rgba(0,245,255,0.25); border-radius:20px; width:100%; max-width:600px; max-height:80vh; display:flex; flex-direction:column; overflow:hidden; box-shadow:0 24px 64px rgba(0,0,0,0.5);">
     <div style="background:linear-gradient(135deg,#8b72dd,#c7b5ff); padding:20px; display:flex; justify-content:space-between; align-items:center; color:white; border-bottom:1px solid rgba(0,245,255,0.2);">
-      <h2 style="font-family:'Outfit', sans-serif; font-size:1.4rem; margin:0; display:flex; align-items:center; gap:10px;">🛒 My Order History</h2>
-      <span id="orders-modal-close" style="cursor:pointer; font-size:1.2rem; font-weight:bold; transition:color 0.2s;" onmouseover="this.style.color='#a78bfa'" onmouseout="this.style.color='white'">✖</span>
+      <h2 id="orders-title" style="font-family:'Outfit', sans-serif; font-size:1.4rem; margin:0; display:flex; align-items:center; gap:10px;">🛒 My Order History</h2>
+      <button type="button" aria-label="Close order history" id="orders-modal-close" style="cursor:pointer; font-size:1.2rem; font-weight:bold; transition:color 0.2s;" onmouseover="this.style.color='#a78bfa'" onmouseout="this.style.color='white'">✖</button>
     </div>
     <div id="orders-modal-content" style="flex:1; padding:24px; overflow-y:auto; color:#e0e0e0; font-family:'Inter', sans-serif;">
       <div style="text-align:center; padding:40px; color:#94a3b8;">Loading orders...</div>
@@ -307,6 +323,7 @@ orderDialog.addEventListener('click',event=>{if(event.target===orderDialog){cons
   });
 
   chatSend.addEventListener('click', async () => {
+    if(chatSend.disabled) return;
     const text = chatInput.value.trim();
     if (!text) return;
 
@@ -363,6 +380,10 @@ orderDialog.addEventListener('click',event=>{if(event.target===orderDialog){cons
   document.getElementById('checkout-form').addEventListener('submit', async function(e) {
     e.preventDefault();
     const btn = document.getElementById('checkout-submit');
+    if(btn.disabled) return;
+    const errorRegion=document.getElementById('checkout-error');
+    errorRegion.hidden=true;
+    if(!this.reportValidity()) return;
     const user = currentUser;
     if (!user) {
       alert("Please log in to complete your order.");
@@ -379,11 +400,13 @@ orderDialog.addEventListener('click',event=>{if(event.target===orderDialog){cons
     const address = document.getElementById('cf-address') ? document.getElementById('cf-address').value.trim() : 'Storefront Checkout';
 
     if (!firstname || !lastname || !email || !phone || !address) {
-      alert("Please fill in all required fields.");
+      errorRegion.textContent="Please fill in all required fields."; errorRegion.hidden=false;
       return;
     }
 
-    btn.textContent = '⏳ Processing...';
+    btn.textContent = 'Sending order…';
+    btn.classList.add('is-loading');
+    btn.setAttribute('aria-busy','true');
     btn.disabled = true;
 
     try {
@@ -405,20 +428,23 @@ orderDialog.addEventListener('click',event=>{if(event.target===orderDialog){cons
       });
 
       if (!resp.ok) {
-        const errorData = await resp.json();
-        throw new Error(errorData.detail || 'Failed to place order');
+        const errorData = await resp.json().catch(()=>({}));
+        throw new Error(typeof errorData.detail==='string' ? errorData.detail : 'The order service is unavailable. Please try again shortly.');
       }
 
-      btn.textContent = '✅ Request Received';
-      btn.style.background = 'linear-gradient(135deg,#059669,#10b981)';
+      
       document.getElementById('order-details').close();
       const toast = document.getElementById('order-toast');
       toast.classList.add('show');
       setTimeout(() => toast.classList.remove('show'), 4500);
     } catch (err) {
-      alert(`❌ Error placing order: ${err.message}`);
-      btn.textContent = 'Submit Order';
-      btn.disabled = false;
+      errorRegion.textContent=err instanceof TypeError ? 'Unable to connect. Please check your connection and try again.' : err.message;
+      errorRegion.hidden=false;
+    } finally {
+      btn.textContent='Submit Order';
+      btn.disabled=false;
+      btn.classList.remove('is-loading');
+      btn.removeAttribute('aria-busy');
     }
   });
 
@@ -426,17 +452,25 @@ orderDialog.addEventListener('click',event=>{if(event.target===orderDialog){cons
   const ordersModal = document.getElementById('orders-modal');
   const ordersClose = document.getElementById('orders-modal-close');
   const ordersContent = document.getElementById('orders-modal-content');
+  let ordersReturnFocus=null;
+  function closeOrders(){ordersModal.style.display='none';ordersReturnFocus?.focus();}
+  ordersModal.addEventListener('keydown',event=>{
+    if(event.key==='Escape'){event.preventDefault();closeOrders();}
+    if(event.key==='Tab'){event.preventDefault();ordersClose.focus();}
+  });
 
   ordersClose.addEventListener('click', () => {
-    ordersModal.style.display = 'none';
+    closeOrders();
   });
 
   ordersModal.addEventListener('click', (e) => {
-    if (e.target === ordersModal) ordersModal.style.display = 'none';
+    if (e.target === ordersModal) closeOrders();
   });
 
   async function openOrdersModal() {
+    ordersReturnFocus=document.activeElement;
     ordersModal.style.display = 'flex';
+    ordersClose.focus();
     ordersContent.innerHTML = `<div style="text-align:center; padding:40px; color:#94a3b8;">⏳ Loading your orders...</div>`;
     
     try {

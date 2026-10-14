@@ -191,7 +191,8 @@
       color: var(--blue-400);
       text-decoration: underline;
     }
-  </style>
+  body::before,body::after{position:fixed;pointer-events:none;max-width:100vw}body{height:auto;min-height:100svh;overflow-y:auto;padding:24px}.login-container{padding:clamp(24px,5vw,40px)}input{font-size:16px}@media(max-height:650px){body{align-items:flex-start}}
+</style>
 </head>
 
 <body>
@@ -205,15 +206,15 @@
     <form id="loginForm">
       <div class="form-group" id="username-group" style="display: none;">
         <label for="username">Username</label>
-        <input type="text" id="username" placeholder="Your Name" />
+        <input type="text" id="username" autocomplete="name" maxlength="120" placeholder="Your Name" />
       </div>
       <div class="form-group">
         <label for="email">Email Address</label>
-        <input type="email" id="email" placeholder="you@example.com" required />
+        <input type="email" id="email" autocomplete="email" maxlength="255" placeholder="you@example.com" required />
       </div>
       <div class="form-group">
         <label for="password">Password</label>
-        <input type="password" id="password" placeholder="••••••••" required />
+        <input type="password" id="password" autocomplete="current-password" placeholder="••••••••" required />
       </div>
       <button type="submit" class="btn-login" id="submit-btn">Sign In</button>
     </form>
@@ -257,7 +258,9 @@
     toggleBtn.addEventListener('click', function (e) {
       e.preventDefault();
       clearError();
+      if(submitBtn.disabled) return;
       isRegisterMode = !isRegisterMode;
+      passwordInput.autocomplete=isRegisterMode?'new-password':'current-password';
 
       if (isRegisterMode) {
         usernameGroup.style.display = 'block';
@@ -286,6 +289,7 @@
         document.getElementById('loginForm').appendChild(el);
       }
       el.style.cssText = `font-size:0.85rem;margin-top:12px;text-align:center;font-weight:600;color:${isSuccess ? '#00ff88' : '#ff4d6d'}`;
+      el.setAttribute('role',isSuccess?'status':'alert');
       el.textContent = msg;
     }
 
@@ -296,6 +300,7 @@
 
     loginForm.addEventListener('submit', async function (e) {
       e.preventDefault();
+      if(submitBtn.disabled) return;
       clearError();
 
       const email = emailInput.value.trim().toLowerCase();
@@ -312,9 +317,11 @@
           // Firebase Register
           const userCredential = await createUserWithEmailAndPassword(auth, email, password);
           await updateProfile(userCredential.user, { displayName: username });
-          showError('✅ Registration successful! Please sign in.', true);
+          
           // Auto toggle back to login mode
+          submitBtn.disabled=false;
           toggleBtn.click();
+          showError('Registration successful! Please sign in.', true);
           passwordInput.value = ''; // clear password
         } else {
           // Firebase Login
@@ -354,6 +361,7 @@ if (!response.ok) {
 }
 
 const data = await response.json();
+if(typeof data.access_token!=='string'||!data.access_token) throw new Error('The storefront service returned an invalid session. Please try again.');
 localStorage.setItem('access_token', data.access_token);
 localStorage.setItem('user_name', userCredential.user.displayName || 'User');
 
@@ -366,7 +374,7 @@ window.location.replace('index.html');
         showError(err instanceof TypeError ? 'The storefront service is unavailable. Please try again shortly.' : `❌ ${err.message}`);
       } finally {
         submitBtn.disabled = false;
-        submitBtn.textContent = originalText;
+        submitBtn.textContent = isRegisterMode ? 'Sign Up' : 'Sign In';
         submitBtn.style.opacity = '1';
       }
     });
