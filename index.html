@@ -266,7 +266,7 @@ orderDialog.addEventListener('click',event=>{if(event.target===orderDialog){cons
   });
 
   // Set this to your deployed backend URL when hosting on Netlify (e.g., https://your-backend.onrender.com)
- const API_BASE_URL = 'https://pureforcebackend1-ghs2woj2.b4a.run';
+ const API_BASE_URL = '/api';
   async function getApiToken(user) {
     const token = localStorage.getItem('access_token');
     if (!token) throw new Error('Please sign in again to continue.');
