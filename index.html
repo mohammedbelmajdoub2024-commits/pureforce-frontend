@@ -5,1143 +5,145 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>PureForce Bleach – The Power of Pure Clean</title>
   <meta name="description" content="Explore the PureForce product range and submit an order request. Payment and delivery are confirmed separately." />
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
   <style>
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
-    :root {
-      --bg-dark: #030712;
-      --bg-card: #0d1117;
-      --bg-glass: rgba(255,255,255,0.04);
-      --blue-900: #023e8a;
-      --blue-600: #0077b6;
-      --blue-400: #00b4d8;
-      --blue-200: #90e0ef;
-      --cyan:     #00f5ff;
-      --white:    #ffffff;
-      --gray-100: #f1f5f9;
-      --gray-400: #94a3b8;
-      --gray-600: #475569;
-      --accent-green: #00ff88;
-      --radius-lg: 24px;
-      --radius-xl: 40px;
-      --transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    html { scroll-behavior: smooth; }
-    body {
-      font-family: 'Inter', sans-serif;
-      background: var(--bg-dark);
-      color: var(--white);
-      overflow-x: hidden;
-    }
-
-    /* ── NAV ── */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 18px 6%;
-      backdrop-filter: blur(18px);
-      background: rgba(3,7,18,0.7);
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-      transition: var(--transition);
-    }
-    .nav-logo {
-      font-family: 'Outfit', sans-serif;
-      font-size: 1.6rem; font-weight: 800;
-      background: linear-gradient(135deg, var(--cyan), var(--blue-400));
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      letter-spacing: -0.5px;
-    }
-    .nav-links { display: flex; gap: 36px; list-style: none; }
-    .nav-links a {
-      color: var(--gray-400); text-decoration: none; font-size: 0.9rem; font-weight: 500;
-      transition: color var(--transition);
-    }
-    .nav-links a:hover { color: var(--cyan); }
-    .nav-cta {
-      background: linear-gradient(135deg, var(--blue-600), var(--blue-400));
-      color: var(--white); border: none; padding: 10px 26px;
-      border-radius: 50px; font-weight: 600; font-size: 0.9rem;
-      cursor: pointer; transition: var(--transition);
-      box-shadow: 0 0 24px rgba(0,180,216,0.3);
-    }
-    .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 0 36px rgba(0,180,216,0.5); }
-
-    /* ── NAV LOGO IMAGE ── */
-    .nav-right {
-      display: flex; align-items: center; gap: 18px;
-    }
-    .nav-logo-img-wrap {
-      position: relative; display: flex; align-items: center; justify-content: center;
-      width: 52px; height: 52px; border-radius: 14px;
-      background: linear-gradient(135deg, rgba(0,119,182,0.25), rgba(0,245,255,0.12));
-      border: 1.5px solid rgba(0,245,255,0.25);
-      box-shadow: 0 0 20px rgba(0,180,216,0.2);
-      transition: var(--transition); cursor: default;
-      overflow: hidden;
-    }
-    .nav-logo-img-wrap::before {
-      content: ''; position: absolute; inset: -2px; border-radius: 16px;
-      background: linear-gradient(135deg, rgba(0,245,255,0.4), transparent, rgba(0,119,182,0.3));
-      opacity: 0; transition: var(--transition);
-      z-index: 0;
-    }
-    .nav-logo-img-wrap:hover { transform: translateY(-2px) scale(1.06); box-shadow: 0 0 36px rgba(0,245,255,0.4); border-color: var(--cyan); }
-    .nav-logo-img-wrap:hover::before { opacity: 1; }
-    .nav-logo-img {
-      width: 38px; height: 38px; object-fit: contain;
-      filter: drop-shadow(0 0 8px rgba(0,245,255,0.6));
-      position: relative; z-index: 1;
-      animation: logoPulse 4s ease-in-out infinite;
-    }
-    @keyframes logoPulse {
-      0%,100% { filter: drop-shadow(0 0 8px rgba(0,245,255,0.6)); }
-      50%      { filter: drop-shadow(0 0 18px rgba(0,245,255,0.9)) brightness(1.15); }
-    }
-    .nav-logo-tooltip {
-      position: absolute; bottom: -42px; left: 50%; transform: translateX(-50%);
-      background: rgba(3,7,18,0.92); border: 1px solid rgba(0,245,255,0.2);
-      color: var(--cyan); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.5px;
-      padding: 5px 12px; border-radius: 8px; white-space: nowrap;
-      opacity: 0; pointer-events: none; transition: opacity 0.2s ease;
-      z-index: 200;
-    }
-    .nav-logo-img-wrap:hover .nav-logo-tooltip { opacity: 1; }
-
-    /* ── HERO ── */
-    .hero {
-      min-height: 100vh;
-      display: flex; align-items: center;
-      padding: 120px 6% 80px;
-      position: relative; overflow: hidden;
-    }
-    .hero-bg {
-      position: absolute; inset: 0;
-      background:
-        radial-gradient(ellipse 80% 60% at 70% 50%, rgba(0,119,182,0.18) 0%, transparent 70%),
-        radial-gradient(ellipse 50% 80% at 10% 80%, rgba(0,245,255,0.08) 0%, transparent 60%),
-        radial-gradient(ellipse 60% 40% at 50% 20%, rgba(0,180,216,0.06) 0%, transparent 60%);
-    }
-    .bubbles { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
-    .bubble {
-      position: absolute; border-radius: 50%;
-      border: 1px solid rgba(0,245,255,0.15);
-      animation: floatUp linear infinite;
-      opacity: 0;
-    }
-    @keyframes floatUp {
-      0%   { opacity: 0; transform: translateY(100vh) scale(0.5); }
-      10%  { opacity: 0.6; }
-      90%  { opacity: 0.3; }
-      100% { opacity: 0; transform: translateY(-20vh) scale(1.2); }
-    }
-    .hero-content { position: relative; z-index: 2; max-width: 560px; }
-    .hero-badge {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: rgba(0,245,255,0.08); border: 1px solid rgba(0,245,255,0.2);
-      border-radius: 50px; padding: 6px 16px; margin-bottom: 28px;
-      font-size: 0.78rem; font-weight: 600; color: var(--cyan); letter-spacing: 0.5px;
-    }
-    .hero-badge .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--cyan); animation: pulse 1.5s ease-in-out infinite; }
-    @keyframes pulse { 0%,100%{ opacity:1;transform:scale(1); } 50%{ opacity:0.4;transform:scale(1.5); } }
-
-    .hero h1 {
-      font-family: 'Outfit', sans-serif;
-      font-size: clamp(3rem, 6vw, 5rem);
-      font-weight: 900; line-height: 1.05;
-      letter-spacing: -2px; margin-bottom: 24px;
-    }
-    .hero h1 span {
-      background: linear-gradient(135deg, var(--cyan) 0%, var(--blue-400) 50%, var(--blue-200) 100%);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    }
-    .hero p {
-      font-size: 1.1rem; color: var(--gray-400); line-height: 1.7;
-      margin-bottom: 40px; font-weight: 400; max-width: 440px;
-    }
-    .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
-    .btn-primary {
-      display: inline-flex; align-items: center; gap: 10px;
-      background: linear-gradient(135deg, var(--blue-600), var(--blue-400));
-      color: var(--white); padding: 16px 36px; border-radius: 50px;
-      font-weight: 700; font-size: 1rem; text-decoration: none;
-      box-shadow: 0 8px 32px rgba(0,180,216,0.4);
-      transition: var(--transition); border: none; cursor: pointer;
-      font-family: 'Outfit', sans-serif;
-    }
-    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 16px 48px rgba(0,180,216,0.5); }
-    .btn-secondary {
-      display: inline-flex; align-items: center; gap: 10px;
-      background: transparent; color: var(--white); padding: 16px 36px;
-      border-radius: 50px; font-weight: 600; font-size: 1rem;
-      text-decoration: none; border: 1.5px solid rgba(255,255,255,0.15);
-      transition: var(--transition); cursor: pointer;
-      font-family: 'Outfit', sans-serif;
-    }
-    .btn-secondary:hover { border-color: var(--cyan); color: var(--cyan); background: rgba(0,245,255,0.04); }
-
-    .hero-image-wrap {
-      position: absolute; right: 2%; top: 50%; transform: translateY(-50%);
-      width: 42%; max-width: 520px; z-index: 2;
-      display: flex; align-items: center; justify-content: center;
-    }
-    .hero-image-wrap img {
-      width: 75%; max-width: 380px;
-      object-fit: contain; object-position: center;
-      filter: drop-shadow(0 40px 80px rgba(0,180,216,0.4));
-      animation: floatImg 4s ease-in-out infinite;
-    }
-    @keyframes floatImg {
-      0%,100%{ transform: translateY(0px) rotate(-1deg); }
-      50%{ transform: translateY(-16px) rotate(1deg); }
-    }
-    .hero-glow {
-      position: absolute; right: 10%; top: 50%; transform: translateY(-50%);
-      width: 400px; height: 400px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(0,180,216,0.25) 0%, transparent 70%);
-      filter: blur(40px); z-index: 1; animation: glowPulse 3s ease-in-out infinite;
-    }
-    @keyframes glowPulse { 0%,100%{opacity:1;} 50%{opacity:0.6;} }
-
-    /* Stats bar */
-    .stats-bar {
-      position: relative; z-index: 10;
-      display: flex; justify-content: center; gap: 0;
-      background: rgba(255,255,255,0.03);
-      border-top: 1px solid rgba(255,255,255,0.06);
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-    }
-    .stat-item {
-      flex: 1; max-width: 220px; padding: 32px 24px;
-      text-align: center; border-right: 1px solid rgba(255,255,255,0.06);
-      transition: var(--transition);
-    }
-    .stat-item:last-child { border-right: none; }
-    .stat-item:hover { background: rgba(255,255,255,0.03); }
-    .stat-num {
-      font-family: 'Outfit', sans-serif; font-size: 2.2rem; font-weight: 800;
-      background: linear-gradient(135deg, var(--cyan), var(--blue-400));
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    }
-    .stat-label { font-size: 0.8rem; color: var(--gray-400); margin-top: 4px; font-weight: 500; letter-spacing: 0.3px; }
-
-    /* ── SECTION HELPERS ── */
-    section { padding: 100px 6%; }
-    .section-tag {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: rgba(0,245,255,0.08); border: 1px solid rgba(0,245,255,0.2);
-      border-radius: 50px; padding: 5px 14px; margin-bottom: 16px;
-      font-size: 0.75rem; font-weight: 700; color: var(--cyan); letter-spacing: 1px; text-transform: uppercase;
-    }
-    .section-title {
-      font-family: 'Outfit', sans-serif;
-      font-size: clamp(2rem, 4vw, 3rem); font-weight: 800;
-      letter-spacing: -1px; line-height: 1.1; margin-bottom: 16px;
-    }
-    .section-sub { color: var(--gray-400); font-size: 1.05rem; line-height: 1.7; max-width: 520px; }
-
-    /* ── FEATURES ── */
-    #features { background: var(--bg-dark); }
-    .features-header { text-align: center; margin-bottom: 64px; }
-    .features-header .section-sub { margin: 0 auto; }
-    .features-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 24px;
-    }
-    .feature-card {
-      background: var(--bg-glass);
-      border: 1px solid rgba(255,255,255,0.07);
-      border-radius: var(--radius-lg); padding: 36px 32px;
-      position: relative; overflow: hidden;
-      transition: var(--transition); cursor: default;
-    }
-    .feature-card::before {
-      content: ''; position: absolute; inset: 0;
-      background: linear-gradient(135deg, rgba(0,180,216,0.05), transparent);
-      opacity: 0; transition: var(--transition);
-    }
-    .feature-card:hover { transform: translateY(-6px); border-color: rgba(0,245,255,0.2); }
-    .feature-card:hover::before { opacity: 1; }
-    .feature-icon {
-      width: 56px; height: 56px; border-radius: 16px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.6rem; margin-bottom: 24px;
-      background: linear-gradient(135deg, rgba(0,119,182,0.3), rgba(0,180,216,0.15));
-      border: 1px solid rgba(0,180,216,0.2);
-    }
-    .feature-card h3 {
-      font-family: 'Outfit', sans-serif; font-size: 1.2rem;
-      font-weight: 700; margin-bottom: 10px;
-    }
-    .feature-card p { color: var(--gray-400); font-size: 0.9rem; line-height: 1.65; }
-
-    /* ── HOW IT WORKS ── */
-    #how-it-works { background: linear-gradient(180deg, var(--bg-dark) 0%, #05090f 100%); }
-    .hiw-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
-    .hiw-steps { display: flex; flex-direction: column; gap: 0; }
-    .step {
-      display: flex; gap: 24px; padding: 28px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-      position: relative; transition: var(--transition);
-    }
-    .step:last-child { border-bottom: none; }
-    .step:hover .step-num { box-shadow: 0 0 24px rgba(0,180,216,0.5); }
-    .step-num {
-      width: 48px; height: 48px; border-radius: 50%; flex-shrink: 0;
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1rem;
-      background: linear-gradient(135deg, var(--blue-600), var(--blue-400));
-      box-shadow: 0 0 16px rgba(0,180,216,0.3);
-      transition: var(--transition);
-    }
-    .step-body h3 { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 1.05rem; margin-bottom: 6px; }
-    .step-body p { color: var(--gray-400); font-size: 0.88rem; line-height: 1.6; }
-
-    .hiw-visual {
-      position: relative; display: flex; align-items: center; justify-content: center;
-    }
-    .hiw-card {
-      background: linear-gradient(135deg, rgba(0,119,182,0.15), rgba(0,180,216,0.05));
-      border: 1px solid rgba(0,180,216,0.2); border-radius: var(--radius-xl);
-      padding: 48px; text-align: center; position: relative; overflow: hidden;
-      width: 100%; max-width: 340px;
-    }
-    .hiw-card .big-num {
-      font-family: 'Outfit', sans-serif; font-size: 8rem; font-weight: 900;
-      background: linear-gradient(135deg, var(--cyan), var(--blue-400));
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      line-height: 1; margin-bottom: 8px;
-    }
-    .hiw-card .big-label { font-family: 'Outfit', sans-serif; font-size: 1.1rem; font-weight: 600; color: var(--gray-400); }
-    .hiw-ring {
-      position: absolute; border-radius: 50%;
-      border: 1px solid rgba(0,245,255,0.1); animation: spinRing linear infinite;
-    }
-    @keyframes spinRing { from{transform:rotate(0deg);} to{transform:rotate(360deg);} }
-
-    /* ── PRODUCTS ── */
-    #products { background: var(--bg-dark); }
-    .products-header { margin-bottom: 56px; }
-    .products-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 28px;
-    }
-    .product-card {
-      background: var(--bg-glass); border: 1px solid rgba(255,255,255,0.07);
-      border-radius: var(--radius-lg); overflow: hidden; transition: var(--transition);
-      position: relative;
-    }
-    .product-card:hover { transform: translateY(-8px); border-color: rgba(0,245,255,0.25); box-shadow: 0 24px 64px rgba(0,0,0,0.4); }
-    .product-img {
-      height: 260px; display: flex; align-items: center; justify-content: center;
-      background: linear-gradient(135deg, rgba(0,119,182,0.12), rgba(0,180,216,0.06));
-      padding: 20px; position: relative; overflow: hidden;
-    }
-    .product-img img { height: 100%; max-height: 220px; width: auto; object-fit: contain; filter: drop-shadow(0 8px 24px rgba(0,180,216,0.3)); transition: var(--transition); }
-    .product-card:hover .product-img img { transform: scale(1.08) rotate(-3deg); }
-    .product-badge {
-      position: absolute; top: 12px; right: 12px;
-      background: linear-gradient(135deg, var(--blue-600), var(--blue-400));
-      color: var(--white); font-size: 0.7rem; font-weight: 700; padding: 4px 12px;
-      border-radius: 50px; letter-spacing: 0.5px;
-    }
-    .product-info { padding: 24px; }
-    .product-info h3 { font-family: 'Outfit', sans-serif; font-size: 1.1rem; font-weight: 700; margin-bottom: 6px; }
-    .product-info p { color: var(--gray-400); font-size: 0.85rem; line-height: 1.6; margin-bottom: 16px; }
-    .product-footer { display: flex; align-items: center; justify-content: space-between; }
-    .product-price {
-      font-family: 'Outfit', sans-serif; font-size: 1.4rem; font-weight: 800;
-      background: linear-gradient(135deg, var(--cyan), var(--blue-400));
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    }
-    .btn-buy {
-      background: linear-gradient(135deg, var(--blue-600), var(--blue-400));
-      color: var(--white); border: none; padding: 10px 22px; border-radius: 50px;
-      font-weight: 600; font-size: 0.85rem; cursor: pointer; transition: var(--transition);
-      font-family: 'Outfit', sans-serif;
-    }
-    .btn-buy:hover { transform: scale(1.05); box-shadow: 0 8px 24px rgba(0,180,216,0.4); }
-
-    /* ── TESTIMONIALS ── */
-    #testimonials {
-      background: linear-gradient(180deg, #05090f 0%, var(--bg-dark) 100%);
-    }
-    .testimonials-header { text-align: center; margin-bottom: 56px; }
-    .testimonials-header .section-sub { margin: 0 auto; }
-    .testimonials-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 24px;
-    }
-    .t-card {
-      background: var(--bg-glass); border: 1px solid rgba(255,255,255,0.07);
-      border-radius: var(--radius-lg); padding: 32px; transition: var(--transition);
-      position: relative;
-    }
-    .t-card:hover { border-color: rgba(0,245,255,0.15); transform: translateY(-4px); }
-    .t-quote { font-size: 2rem; color: var(--blue-400); margin-bottom: 12px; line-height: 1; }
-    .t-text { color: var(--gray-400); font-size: 0.92rem; line-height: 1.7; margin-bottom: 24px; font-style: italic; }
-    .t-author { display: flex; align-items: center; gap: 14px; }
-    .t-avatar {
-      width: 44px; height: 44px; border-radius: 50%;
-      background: linear-gradient(135deg, var(--blue-600), var(--blue-400));
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 0.9rem;
-      flex-shrink: 0;
-    }
-    .t-author-info .name { font-weight: 600; font-size: 0.9rem; margin-bottom: 2px; }
-    .t-author-info .role { color: var(--gray-400); font-size: 0.78rem; }
-    .t-stars { color: #fbbf24; font-size: 0.9rem; margin-bottom: 14px; letter-spacing: 2px; }
-
-    /* ── CTA BANNER ── */
-    #cta {
-      padding: 100px 6%;
-      background: linear-gradient(135deg, rgba(0,119,182,0.15) 0%, rgba(0,180,216,0.08) 50%, rgba(0,245,255,0.05) 100%);
-      border-top: 1px solid rgba(0,180,216,0.15);
-      border-bottom: 1px solid rgba(0,180,216,0.15);
-      text-align: center; position: relative; overflow: hidden;
-    }
-    #cta::before {
-      content: ''; position: absolute;
-      width: 600px; height: 600px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(0,180,216,0.12), transparent);
-      top: 50%; left: 50%; transform: translate(-50%,-50%);
-      filter: blur(60px);
-    }
-    #cta .section-title { font-size: clamp(2.2rem, 5vw, 4rem); max-width: 700px; margin: 0 auto 20px; }
-    #cta .section-sub { margin: 0 auto 40px; }
-    .cta-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
-
-    /* ── CHECKOUT FORM ── */
-    #checkout {
-      background: linear-gradient(180deg, var(--bg-dark) 0%, #05090f 100%);
-      border-top: 1px solid rgba(0,180,216,0.15);
-    }
-    .checkout-inner {
-      max-width: 700px; margin: 0 auto;
-    }
-    .checkout-header { text-align: center; margin-bottom: 48px; }
-    .checkout-header .section-sub { margin: 0 auto; }
-
-    .checkout-form {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: var(--radius-xl);
-      padding: 48px;
-      position: relative; overflow: hidden;
-    }
-    .checkout-form::before {
-      content: ''; position: absolute; inset: 0;
-      background: linear-gradient(135deg, rgba(0,119,182,0.06), transparent 60%);
-      pointer-events: none;
-    }
-
-    .form-section-label {
-      font-family: 'Outfit', sans-serif; font-size: 0.75rem; font-weight: 700;
-      color: var(--cyan); letter-spacing: 1.5px; text-transform: uppercase;
-      margin-bottom: 16px; display: flex; align-items: center; gap: 10px;
-    }
-    .form-section-label::after {
-      content: ''; flex: 1; height: 1px;
-      background: rgba(255,255,255,0.06);
-    }
-    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
-    .form-row.single { grid-template-columns: 1fr; }
-    .form-group { display: flex; flex-direction: column; gap: 8px; margin-bottom: 0; }
-    .form-group label {
-      font-size: 0.82rem; font-weight: 600; color: var(--gray-400); letter-spacing: 0.3px;
-    }
-    .form-group input, .form-group select {
-      background: rgba(255,255,255,0.05);
-      border: 1.5px solid rgba(255,255,255,0.1);
-      border-radius: 12px; padding: 14px 18px;
-      color: var(--white); font-size: 0.95rem;
-      font-family: 'Inter', sans-serif;
-      transition: border-color var(--transition), box-shadow var(--transition);
-      outline: none; width: 100%;
-    }
-    .form-group input::placeholder { color: var(--gray-600); }
-    .form-group input:focus, .form-group select:focus {
-      border-color: var(--cyan); box-shadow: 0 0 0 3px rgba(0,245,255,0.08);
-      background: rgba(255,255,255,0.07);
-    }
-    .form-group select { cursor: pointer; }
-    .form-group select option { background: #0d1117; color: var(--white); }
-
-    /* Card number with card icons */
-    .card-input-wrap { position: relative; }
-    .card-input-wrap input { padding-right: 90px; }
-    .card-icons {
-      position: absolute; right: 14px; top: 50%; transform: translateY(-50%);
-      display: flex; gap: 6px; align-items: center;
-    }
-    .card-icon {
-      height: 22px; border-radius: 4px; padding: 2px 6px;
-      font-size: 0.65rem; font-weight: 800; letter-spacing: 0.5px;
-      display: flex; align-items: center; justify-content: center;
-    }
-    .card-icon.visa { background: #1a1f71; color: #fff; font-style: italic; font-size: 0.75rem; }
-    .card-icon.mc {
-      background: linear-gradient(90deg, #eb001b 50%, #f79e1b 50%);
-      width: 30px; height: 20px; border-radius: 4px;
-      position: relative; overflow: hidden;
-    }
-    .card-icon.mc::after {
-      content: ''; position: absolute;
-      width: 14px; height: 14px; border-radius: 50%;
-      background: rgba(255,255,0,0.5);
-      top: 50%; left: 50%; transform: translate(-50%,-50%);
-    }
-
-    /* Payment method selector */
-    .payment-methods {
-      display: flex; gap: 12px; margin-bottom: 16px;
-    }
-    .payment-method {
-      flex: 1; padding: 14px; border-radius: 12px;
-      border: 1.5px solid rgba(255,255,255,0.1);
-      background: rgba(255,255,255,0.03);
-      cursor: pointer; text-align: center; transition: var(--transition);
-      display: flex; flex-direction: column; align-items: center; gap: 6px;
-    }
-    .payment-method input[type=radio] { display: none; }
-    .payment-method.active, .payment-method:has(input:checked) {
-      border-color: var(--cyan); background: rgba(0,245,255,0.06);
-      box-shadow: 0 0 20px rgba(0,245,255,0.1);
-    }
-    .payment-method .pm-name { font-size: 0.78rem; font-weight: 600; color: var(--gray-400); }
-    .payment-method .pm-logo {
-      font-size: 1.2rem; font-weight: 900; font-family: 'Outfit', sans-serif;
-    }
-
-    /* Product selector in form */
-    .product-selector { display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
-    .ps-item {
-      flex: 1; min-width: 150px; padding: 14px 16px;
-      border-radius: 14px; border: 1.5px solid rgba(255,255,255,0.1);
-      background: rgba(255,255,255,0.03); cursor: pointer;
-      transition: var(--transition); position: relative;
-    }
-    .ps-item input[type=radio] { display: none; }
-    .ps-item.active, .ps-item:has(input:checked) {
-      border-color: var(--blue-400); background: rgba(0,180,216,0.08);
-    }
-    .ps-item .ps-name { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 0.9rem; margin-bottom: 2px; }
-    .ps-item .ps-price {
-      font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1rem;
-      background: linear-gradient(135deg,var(--cyan),var(--blue-400));
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    }
-
-    /* Total / submit */
-    .checkout-total {
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 20px 0;
-      border-top: 1px solid rgba(255,255,255,0.07);
-      border-bottom: 1px solid rgba(255,255,255,0.07);
-      margin: 24px 0;
-    }
-    .total-label { color: var(--gray-400); font-size: 0.9rem; }
-    .total-amount {
-      font-family: 'Outfit', sans-serif; font-size: 1.8rem; font-weight: 900;
-      background: linear-gradient(135deg, var(--cyan), var(--blue-400));
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    }
-    .btn-checkout {
-      width: 100%; padding: 18px; border-radius: 14px;
-      background: linear-gradient(135deg, var(--blue-600), var(--blue-400));
-      color: #fff; font-family: 'Outfit', sans-serif;
-      font-size: 1.1rem; font-weight: 800; border: none; cursor: pointer;
-      box-shadow: 0 8px 32px rgba(0,180,216,0.35);
-      transition: var(--transition); display: flex; align-items: center; justify-content: center; gap: 10px;
-      letter-spacing: 0.3px;
-    }
-    .btn-checkout:hover { transform: translateY(-3px); box-shadow: 0 16px 48px rgba(0,180,216,0.5); }
-    .secure-badges {
-      display: flex; justify-content: center; gap: 20px; margin-top: 20px; flex-wrap: wrap;
-    }
-    .secure-badge {
-      display: flex; align-items: center; gap: 6px;
-      color: var(--gray-600); font-size: 0.75rem; font-weight: 500;
-    }
-    .secure-badge span { font-size: 0.9rem; }
-
-    /* Success toast */
-    .toast {
-      position: fixed; bottom: 32px; right: 32px;
-      background: linear-gradient(135deg, #059669, #10b981);
-      color: #fff; padding: 16px 28px; border-radius: 14px;
-      font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 1rem;
-      box-shadow: 0 16px 40px rgba(0,0,0,0.4);
-      transform: translateY(100px); opacity: 0;
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      z-index: 9999;
-    }
-    .toast.show { transform: translateY(0); opacity: 1; }
-
-    /* ── TRAILER / VIDEO ── */
-    #trailer {
-      background: linear-gradient(180deg, var(--bg-dark) 0%, #02050d 100%);
-      text-align: center; position: relative; overflow: hidden;
-    }
-    .trailer-header { margin-bottom: 56px; }
-    .trailer-header .section-sub { margin: 0 auto; }
-
-    .video-scene {
-      position: relative; max-width: 900px; margin: 0 auto;
-      border-radius: var(--radius-xl); overflow: hidden;
-      box-shadow: 0 40px 120px rgba(0,180,216,0.25), 0 0 0 1px rgba(0,245,255,0.12);
-      cursor: pointer;
-    }
-    /* Cinematic glow rings */
-    .video-scene::before {
-      content: '';
-      position: absolute; inset: -2px;
-      border-radius: calc(var(--radius-xl) + 2px);
-      background: linear-gradient(135deg, rgba(0,245,255,0.4), rgba(0,119,182,0.2), rgba(0,245,255,0.1));
-      z-index: 0;
-      animation: borderGlow 3s ease-in-out infinite alternate;
-    }
-    @keyframes borderGlow {
-      0%   { opacity: 0.5; }
-      100% { opacity: 1; }
-    }
-
-    .video-thumbnail {
-      position: relative; z-index: 1;
-      width: 100%; aspect-ratio: 16/9;
-      background: linear-gradient(135deg, #020d1f 0%, #03142b 40%, #010d1a 100%);
-      display: flex; align-items: center; justify-content: center;
-      overflow: hidden;
-    }
-    /* Animated scan-line texture */
-    .video-thumbnail::after {
-      content: '';
-      position: absolute; inset: 0;
-      background: repeating-linear-gradient(
-        0deg,
-        transparent,
-        transparent 2px,
-        rgba(0,245,255,0.015) 2px,
-        rgba(0,245,255,0.015) 4px
-      );
-      pointer-events: none;
-    }
-
-    .vt-particles {
-      position: absolute; inset: 0; overflow: hidden; pointer-events: none;
-    }
-    .vt-particle {
-      position: absolute; border-radius: 50%;
-      background: radial-gradient(circle, rgba(0,245,255,0.6), transparent);
-      animation: vtFloat linear infinite;
-      opacity: 0;
-    }
-    @keyframes vtFloat {
-      0%   { opacity: 0; transform: translateY(100%) scale(0.3); }
-      15%  { opacity: 0.7; }
-      85%  { opacity: 0.3; }
-      100% { opacity: 0; transform: translateY(-100%) scale(1); }
-    }
-
-    /* Big text overlay in thumbnail */
-    .vt-overlay {
-      position: relative; z-index: 2; text-align: center; padding: 40px;
-    }
-    .vt-brand {
-      font-family: 'Outfit', sans-serif; font-size: clamp(3rem, 7vw, 6rem);
-      font-weight: 900; letter-spacing: -3px; line-height: 1;
-      background: linear-gradient(135deg, #ffffff 0%, var(--cyan) 50%, var(--blue-400) 100%);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      text-shadow: none;
-      animation: textShimmer 3s ease-in-out infinite alternate;
-    }
-    @keyframes textShimmer {
-      0%   { filter: brightness(1); }
-      100% { filter: brightness(1.3); }
-    }
-    /* Promo slideshow */
-    .promo-slides {
-      position: relative; z-index: 2;
-      width: 100%; height: 100%;
-      display: flex; align-items: center; justify-content: center;
-    }
-    .promo-slide {
-      position: absolute; inset: 0;
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      padding: 48px 60px; text-align: center;
-      opacity: 0; transform: scale(0.96) translateY(16px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-      pointer-events: none;
-    }
-    .promo-slide.active {
-      opacity: 1; transform: scale(1) translateY(0);
-      pointer-events: auto;
-    }
-    .slide-emoji {
-      font-size: 4rem; margin-bottom: 16px;
-      filter: drop-shadow(0 0 20px rgba(0,245,255,0.5));
-      animation: emojiFloat 3s ease-in-out infinite;
-    }
-    @keyframes emojiFloat {
-      0%,100%{ transform: translateY(0); }
-      50%    { transform: translateY(-8px); }
-    }
-    .slide-step {
-      font-family: 'Outfit', sans-serif; font-size: 0.72rem; font-weight: 800;
-      color: var(--cyan); letter-spacing: 4px; text-transform: uppercase;
-      margin-bottom: 10px;
-      border: 1px solid rgba(0,245,255,0.3); padding: 4px 14px; border-radius: 50px;
-      display: inline-block;
-    }
-    .slide-heading {
-      font-family: 'Outfit', sans-serif; font-size: clamp(1.6rem, 3vw, 2.4rem);
-      font-weight: 900; letter-spacing: -1px;
-      background: linear-gradient(135deg, #fff 0%, var(--cyan) 60%, var(--blue-400) 100%);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      margin-bottom: 14px; line-height: 1.1;
-    }
-    .slide-desc {
-      color: var(--gray-400); font-size: 1rem; line-height: 1.65;
-      max-width: 480px; margin: 0 auto 28px;
-    }
-    .slide-progress {
-      width: 200px; height: 3px; background: rgba(255,255,255,0.1);
-      border-radius: 2px; overflow: hidden; margin: 0 auto;
-    }
-    .slide-progress-fill {
-      height: 100%; width: 0%;
-      background: linear-gradient(90deg, var(--cyan), var(--blue-400));
-      border-radius: 2px;
-      transition: width linear;
-    }
-    .promo-slide.active .slide-progress-fill { width: 100%; }
-
-    /* Slide dots */
-    .slide-dots {
-      position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%);
-      display: flex; gap: 10px; z-index: 5;
-    }
-    .slide-dot {
-      width: 8px; height: 8px; border-radius: 50%;
-      background: rgba(255,255,255,0.2); cursor: pointer;
-      transition: var(--transition);
-    }
-    .slide-dot.active { background: var(--cyan); transform: scale(1.3); }
-
-    /* Corner brand watermark */
-    .promo-brand-corner {
-      position: absolute; top: 20px; left: 24px; z-index: 5;
-      font-family: 'Outfit', sans-serif; font-size: 0.85rem; font-weight: 800;
-      background: linear-gradient(135deg, var(--cyan), var(--blue-400));
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      letter-spacing: 1px; opacity: 0.7;
-    }
-
-    /* Watch on YouTube CTA bar */
-    .video-cta-bar {
-      position: relative; z-index: 3;
-      display: flex; align-items: center; justify-content: space-between;
-      gap: 16px; flex-wrap: wrap;
-      padding: 18px 28px;
-      background: rgba(255,255,255,0.03);
-      border-top: 1px solid rgba(0,245,255,0.12);
-    }
-    .vcta-label {
-      color: var(--gray-400); font-size: 0.9rem; font-weight: 500;
-    }
-    .btn-watch-yt {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: linear-gradient(135deg, #ff0000, #cc0000);
-      color: #fff; padding: 10px 24px; border-radius: 50px;
-      font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 0.9rem;
-      text-decoration: none; transition: var(--transition);
-      box-shadow: 0 4px 20px rgba(255,0,0,0.3);
-      white-space: nowrap;
-    }
-    .btn-watch-yt:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(255,0,0,0.45); }
-
-    /* Stats strip below video */
-    .trailer-strip {
-      display: flex; justify-content: center; gap: 48px;
-      margin-top: 48px; flex-wrap: wrap;
-    }
-    .ts-item { text-align: center; }
-    .ts-num {
-      font-family: 'Outfit', sans-serif; font-size: 1.8rem; font-weight: 800;
-      background: linear-gradient(135deg, var(--cyan), var(--blue-400));
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    }
-    .ts-label { font-size: 0.78rem; color: var(--gray-400); font-weight: 500; margin-top: 4px; }
-
-    /* ── FOOTER ── */
-    footer {
-      padding: 60px 6% 32px;
-      border-top: 1px solid rgba(255,255,255,0.06);
-    }
-    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
-    .footer-brand .nav-logo { display: block; margin-bottom: 14px; }
-    .footer-brand p { color: var(--gray-400); font-size: 0.88rem; line-height: 1.7; max-width: 260px; }
-    .footer-col h4 { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 0.9rem; margin-bottom: 16px; color: var(--white); }
-    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-    .footer-col ul a { color: var(--gray-400); text-decoration: none; font-size: 0.85rem; transition: color var(--transition); }
-    .footer-col ul a:hover { color: var(--cyan); }
-    .footer-bottom {
-      display: flex; justify-content: space-between; align-items: center;
-      padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.06);
-      flex-wrap: wrap; gap: 12px;
-    }
-    .footer-bottom p { color: var(--gray-600); font-size: 0.82rem; }
-
-    /* ── ANIMATIONS ── */
-    .fade-up { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
-    .fade-up.visible { opacity: 1; transform: translateY(0); }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 1024px) {
-      .hero-image-wrap { width: 44%; right: 0; }
-      .hiw-inner { grid-template-columns: 1fr; gap: 48px; }
-      .hiw-visual { display: none; }
-      .footer-grid { grid-template-columns: 1fr 1fr; }
-    }
-    @media (max-width: 768px) {
-      nav { padding: 14px 5%; }
-      .nav-links { display: none; }
-      .hero { flex-direction: column; padding-top: 110px; text-align: center; }
-      .hero-content { max-width: 100%; }
-      .hero p { margin: 0 auto 40px; }
-      .hero-actions { justify-content: center; }
-      .hero-image-wrap { position: relative; width: 60%; max-width: 260px; top: auto; transform: none; right: auto; margin: 40px auto 0; }
-      .hero-image-wrap img { width: 100%; }
-      .hero-glow { display: none; }
-      .stats-bar { flex-wrap: wrap; }
-      .stat-item { min-width: 50%; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.06); }
-      .footer-grid { grid-template-columns: 1fr; }
-      .form-row { grid-template-columns: 1fr; }
-      .checkout-form { padding: 28px 20px; }
-      .payment-methods { flex-direction: column; }
-    }
-  </style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg-dark:#0b0f14;--bg-card:#171c24;--white:#f4f1e8;--gray-400:#c7c2b8;--cyan:#a78bfa;--accent-green:#a78bfa;color-scheme:dark}
+html{scroll-behavior:smooth;scroll-padding-top:24px}
+body{background:var(--bg-dark);color:var(--white);font:16px/1.5 Inter,sans-serif}
+a{color:inherit;text-decoration:none}button,input,select{font:inherit}button,a,input,select{ -webkit-tap-highlight-color:transparent }
+button{cursor:pointer}button:disabled{cursor:wait;opacity:.7}
+:focus-visible{outline:2px solid #d8ccff;outline-offset:4px}
+.site-header{height:84px;background:#0f141b}
+nav{height:100%;padding:0 4.45%;display:flex;align-items:center;gap:28px}
+.nav-logo{font:30px/1.1 'Cormorant Garamond',serif}
+.nav-links{display:flex;gap:60px;list-style:none;margin-left:auto;margin-right:16%;color:var(--gray-400);font-size:14px}
+.nav-links a:hover{color:var(--cyan)}
+.button,.btn-buy,.btn-checkout{display:inline-flex;align-items:center;justify-content:center;border:0;border-radius:3px;background:var(--cyan);color:#0b0f14;font:700 15px/1.2 Inter,sans-serif;min-height:52px;padding:0 28px;transition:background .2s,transform .2s}
+.button:hover,.btn-buy:hover,.btn-checkout:hover{background:#b9a4ff;transform:translateY(-2px)}
+.nav-cta{width:190px}.button-secondary{background:transparent;color:var(--white);padding:0 18px}.button-secondary:hover{background:#171c24}
+.hero{display:grid;grid-template-columns:54.1667% 45.8333%;grid-template-rows:minmax(0,1fr);height:616px;background:#0f141b}
+.hero-content{padding:60px 6vw 40px 6.4vw;min-width:0}
+.eyebrow{color:var(--cyan);font-size:12px;font-weight:700;letter-spacing:1.7px;line-height:18px;text-transform:uppercase}
+.hero h1{margin-top:36px;font:400 clamp(48px,5.28vw,76px)/1 'Cormorant Garamond',serif;letter-spacing:-1px}
+.hero h1 em{display:block;color:var(--cyan);font-size:clamp(52px,5.98vw,86px);font-weight:400}
+.hero-copy{max-width:540px;font-size:19px;line-height:1.5;color:var(--gray-400);margin-top:10px}
+.hero-actions{display:flex;align-items:center;gap:18px;margin-top:24px}
+.hero-actions .button:first-child{width:180px;flex-shrink:0}
+.hero-image{min-height:0;width:100%;height:100%;display:block;object-fit:cover}
+.content-section{padding-left:6.4%;padding-right:9.3%}
+#features{padding-top:60px}
+.section-title{font:400 50px/1.1 'Cormorant Garamond',serif;margin-top:20px}
+.section-sub{color:var(--gray-400);font-size:17px;line-height:1.5;margin-top:6px}
+.features-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px;margin-top:24px}
+.feature-card{min-height:130px;padding:22px 24px;background:var(--bg-card);border-radius:3px}
+.feature-card h3{font-size:19px;line-height:1.4;margin-bottom:12px}
+.feature-card p{font-size:15px;line-height:1.4;color:var(--gray-400)}
+#products{padding-top:60px;padding-bottom:38px}
+.products-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px;margin-top:24px}
+.product-card{background:var(--bg-card);border-radius:3px;min-height:340px;padding:16px 18px 30px}
+.product-img{display:block;width:100%;height:138px;object-fit:cover}
+.product-info{padding:10px 6px 0}
+.product-info .product-badge{color:var(--cyan);font-size:12px;font-weight:700;min-height:0;margin-top:0}
+.product-info h3{font-size:21px;line-height:1.4;margin-top:6px}
+.product-info p{font-size:14px;line-height:1.4;color:var(--gray-400);margin-top:12px;min-height:32px}
+.product-footer{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:14px}
+.product-price{font-size:17px;font-weight:700}
+.btn-buy{font-size:13px;min-height:40px;width:150px;padding:0 15px}
+#checkout{background:#0f141b;padding-top:44px;padding-bottom:18px;min-height:430px}
+#checkout .section-title{font-size:46px;margin-top:12px}
+#checkout .section-sub{font-size:16px;margin-top:12px}
+.form-section-label{color:var(--cyan);font-size:12px;font-weight:700;letter-spacing:1.7px;margin:16px 0}
+.product-selector{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;max-width:1142px}
+.ps-item{position:relative;display:block;min-height:112px;border:1px solid rgba(167,139,250,.2);border-radius:12px;padding:16px;background:var(--bg-card);cursor:pointer;transition:border-color .2s,background .2s}
+.ps-item:has(input:checked){border-color:var(--cyan);background:#1d2030}
+.ps-item:focus-within{outline:2px solid #d8ccff;outline-offset:3px}
+.ps-item input{position:absolute;opacity:0;width:1px;height:1px}
+.ps-top{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:13px;font-weight:700}
+.ps-name{color:var(--cyan);font-size:12px;letter-spacing:1.7px;text-transform:uppercase}
+.ps-detail{font-size:13px;margin-top:10px}
+.checkout-actions{display:flex;align-items:center;justify-content:space-between;gap:24px;margin-top:16px}
+.checkout-actions p{font-size:13px;color:var(--gray-400)}
+.checkout-actions .button{width:210px;flex-shrink:0}
+.copyright{font-size:13px;color:var(--gray-400);margin-top:16px}
+dialog{color:var(--white);background:var(--bg-card);border:1px solid rgba(167,139,250,.25);border-radius:16px;padding:28px;width:min(640px,calc(100% - 32px));max-height:90vh;overflow:auto;margin:auto}
+dialog::backdrop{background:rgba(0,0,0,.7);backdrop-filter:blur(6px)}
+.dialog-header{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:18px}
+.dialog-header h2{font:400 36px/1.1 'Cormorant Garamond',serif}
+.close-dialog{background:transparent;border:0;color:var(--gray-400);font-size:26px;padding:2px 8px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.form-row.single{grid-template-columns:1fr}
+.form-group label{display:block;font-size:13px;color:var(--gray-400);margin-bottom:8px}
+.form-group input,.form-group select{width:100%;border:1px solid rgba(244,241,232,.14);background:#0f141b;color:var(--white);border-radius:6px;min-height:46px;padding:10px 12px}
+.checkout-total{display:flex;justify-content:space-between;align-items:center;margin:20px 0;padding-top:18px;border-top:1px solid rgba(244,241,232,.1)}
+.total-amount{font-weight:700;font-size:24px;color:var(--cyan)}
+.btn-checkout{width:100%}
+.dialog-note{font-size:12px;color:var(--gray-400);margin-top:14px}
+.toast{position:fixed;bottom:30px;left:50%;transform:translate(-50%,20px);max-width:calc(100% - 40px);padding:16px 22px;background:#24202e;border:1px solid var(--cyan);border-radius:10px;z-index:10001;opacity:0;visibility:hidden;transition:.25s}
+.toast.show{opacity:1;visibility:visible;transform:translate(-50%,0)}
+#account-controls{background:#0f141b;display:flex;justify-content:flex-end;padding:0 4.45%;font-size:12px}
+#account-controls:empty{display:none}
+#ai-chat-btn{background:var(--cyan)!important;box-shadow:0 8px 24px rgba(167,139,250,.2)!important}
+#ai-chat-box{background:var(--bg-card)!important;border-color:rgba(167,139,250,.3)!important}
+#ai-chat-box>div:first-child{background:#24202e!important}
+#ai-chat-send{background:var(--cyan)!important;color:#0b0f14!important}
+#ai-chat-widget{bottom:16px!important;right:16px!important}
+.reveal{animation:enter .8s cubic-bezier(.2,.7,.2,1) both;animation-delay:var(--delay,0s)}
+@keyframes enter{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:1050px){.hero{height:auto;min-height:560px}.hero-content{padding:48px 24px 48px 6.4vw}.hero h1{margin-top:24px}.hero-copy{font-size:17px}.hero-actions{gap:8px;flex-wrap:wrap}.nav-links{margin-right:auto}.feature-card{padding:20px 18px}.ps-name{letter-spacing:.7px}.ps-top{flex-wrap:wrap}.product-footer{flex-wrap:wrap}}
+@media(max-width:700px){nav{padding:0 24px;gap:14px}.nav-logo{font-size:27px}.nav-links{display:none}.nav-cta{width:auto;margin-left:auto;min-height:44px;padding:0 20px}.hero{grid-template-columns:1fr}.hero-content{padding:40px 24px}.hero h1{font-size:58px}.hero h1 em{font-size:66px}.hero-copy{max-width:520px}.hero-image{height:380px}.content-section{padding-left:24px;padding-right:24px}.section-title{font-size:42px}.features-grid,.products-grid,.product-selector{grid-template-columns:1fr}.features-grid,.products-grid{gap:18px}.product-card{min-height:auto;padding-bottom:24px}.product-img{height:200px}.product-footer{flex-wrap:nowrap}.product-info p{min-height:auto}.ps-item{min-height:96px}.checkout-actions{align-items:flex-start;flex-direction:column}.checkout-actions .button{width:100%}.form-row{grid-template-columns:1fr}#checkout .section-title{font-size:42px}#account-controls{padding:0 24px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.reveal{animation:none}*,*::before,*::after{transition:none!important}}
+</style>
 
 </head>
 <body>
 
-  <!-- NAV -->
-  <nav id="navbar">
-    <div class="nav-logo">PureForce</div>
-    <ul class="nav-links">
-      <li><a href="#features">Features</a></li>
-      <li><a href="#how-it-works">How It Works</a></li>
-      <li><a href="#products">Products</a></li>
-      <li><a href="#testimonials">Before You Use</a></li>
-      <li><a href="#trailer">Order Process</a></li>
-    </ul>
-    <div class="nav-right">
-      <button class="nav-cta" onclick="document.getElementById('checkout').scrollIntoView({behavior:'smooth'})">Order Now</button>
-      <div class="nav-logo-img-wrap" title="PureForce Bleach product range" aria-label="PureForce Brand Logo">
-        <img src="pureforce_logo.svg" alt="PureForce Logo" class="nav-logo-img" />
-        <span class="nav-logo-tooltip">PureForce Bleach</span>
-      </div>
-    </div>
-  </nav>
-
-  <!-- HERO -->
-  <section class="hero" id="home">
-    <div class="hero-bg"></div>
-    <div class="bubbles" id="bubbles"></div>
-    <div class="hero-glow"></div>
-
-    <div class="hero-content fade-up">
-      <div class="hero-badge">
-        <span class="dot"></span>
-        PUREFORCE PRODUCT RANGE
-      </div>
-      <h1>The Power<br />of <span>Pure Clean.</span></h1>
-      <p>Explore the PureForce range. Check each product label for approved uses, directions, and safety information before use.</p>
-      <div class="hero-actions">
-        <a id="hero-shop-btn" href="#products" class="btn-primary">
-          🛒 Shop Now
-        </a>
-        <a id="hero-learn-btn" href="#how-it-works" class="btn-secondary">
-          Learn How It Works →
-        </a>
-      </div>
-    </div>
-
-    <div class="hero-image-wrap fade-up" style="transition-delay:0.2s">
-      <img id="hero-product-img" src="bleach_product.svg" alt="PureForce Bleach Bottle" />
-    </div>
-  </section>
-
-  <!-- FEATURES -->
-  <section id="features">
-    <div class="features-header fade-up">
-      <div class="section-tag">✦ Product Information</div>
-      <h2 class="section-title">Choose with <span style="background:linear-gradient(135deg,#00f5ff,#00b4d8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">care</span></h2>
-      <p class="section-sub">Product directions and ingredients can vary by variant. Always follow the information printed on the specific container.</p>
-    </div>
-    <div class="features-grid">
-      <div class="feature-card fade-up"><div class="feature-icon">🧴</div><h3>Compare the range</h3><p>Review the available PureForce Original, Ultra, and Eco options before choosing a product.</p></div>
-      <div class="feature-card fade-up" style="transition-delay:0.1s"><div class="feature-icon">🏷️</div><h3>Read the product label</h3><p>Check the label for ingredients, approved uses, dilution, contact time, and precautions.</p></div>
-      <div class="feature-card fade-up" style="transition-delay:0.2s"><div class="feature-icon">🧺</div><h3>Check compatibility</h3><p>Use a product only on the surfaces or fabrics listed on its label.</p></div>
-      <div class="feature-card fade-up" style="transition-delay:0.3s"><div class="feature-icon">🛒</div><h3>Send an order request</h3><p>Choose a product and quantity, then submit your contact and delivery details.</p></div>
-      <div class="feature-card fade-up" style="transition-delay:0.1s"><div class="feature-icon">💬</div><h3>Confirm payment separately</h3><p>The website records an order request. Payment is arranged after the request is reviewed.</p></div>
-      <div class="feature-card fade-up" style="transition-delay:0.2s"><div class="feature-icon">📦</div><h3>Review delivery details</h3><p>Delivery arrangements are confirmed with you after you submit the request.</p></div>
-    </div>
-  </section>
-
-  <!-- HOW IT WORKS -->
-  <section id="how-it-works">
-    <div class="hiw-inner">
-      <div class="fade-up">
-        <div class="section-tag">✦ Simple to Use</div>
-        <h2 class="section-title" style="margin-bottom:12px">Use products<br/><span style="background:linear-gradient(135deg,#00f5ff,#00b4d8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">as labelled.</span></h2>
-        <p class="section-sub" style="margin-bottom:40px">Product-specific directions are not provided on this page. Use the instructions and precautions printed on the container.</p>
-        <div class="hiw-steps">
-          <div class="step">
-            <div class="step-num">1</div>
-            <div class="step-body">
-              <h3>Read the container</h3>
-              <p>Check approved uses, dilution, contact time, and precautions for the specific product you selected.</p>
-            </div>
-          </div>
-          <div class="step">
-            <div class="step-num">2</div>
-            <div class="step-body">
-              <h3>Follow directions</h3>
-              <p>Follow the label exactly. Do not rely on general instructions from this website for product use.</p>
-            </div>
-          </div>
-          <div class="step">
-            <div class="step-num">3</div>
-            <div class="step-body">
-              <h3>Store as directed</h3>
-              <p>Follow the package instructions for storage and disposal, and keep the product away from children.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="hiw-visual fade-up" style="transition-delay:0.2s">
-        <div class="hiw-ring" style="width:320px;height:320px;animation-duration:18s;"></div>
-        <div class="hiw-ring" style="width:240px;height:240px;animation-duration:12s;animation-direction:reverse;"></div>
-        <div class="hiw-card">
-          <div class="big-num">LABEL</div>
-          <div class="big-label">Read before use</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PRODUCTS -->
-  <section id="products">
-    <div class="products-header fade-up">
-      <div class="section-tag">✦ Our Range</div>
-      <h2 class="section-title">Find Your <span style="background:linear-gradient(135deg,#00f5ff,#00b4d8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Perfect Match</span></h2>
-      <p class="section-sub">Browse the available product options. Check each container for its intended use and directions.</p>
-    </div>
-    <div class="products-grid">
-      <div class="product-card fade-up" id="product-original">
-        <div class="product-img">
-          <img src="bleach_product.svg" alt="PureForce Original" />
-          <div class="product-badge">ORIGINAL</div>
-        </div>
-        <div class="product-info">
-          <h3>PureForce Original</h3>
-          <p>Check the container label for ingredients, approved applications, and use directions.</p>
-          <div class="product-footer">
-            <div class="product-price">$8.99</div>
-            <button id="buy-original" class="btn-buy">Add to Cart</button>
-          </div>
-        </div>
-      </div>
-      <div class="product-card fade-up" id="product-ultra" style="transition-delay:0.1s">
-        <div class="product-img">
-          <img src="bleach_product.svg" alt="PureForce Ultra" style="filter:hue-rotate(40deg) drop-shadow(0 8px 24px rgba(0,180,216,0.3))"/>
-          <div class="product-badge" style="background:linear-gradient(135deg,#7c3aed,#a855f7)">ULTRA</div>
-        </div>
-        <div class="product-info">
-          <h3>PureForce Ultra</h3>
-          <p>Check the container label for this product’s approved uses, directions, and precautions.</p>
-          <div class="product-footer">
-            <div class="product-price">$14.99</div>
-            <button id="buy-ultra" class="btn-buy">Add to Cart</button>
-          </div>
-        </div>
-      </div>
-      <div class="product-card fade-up" id="product-eco" style="transition-delay:0.2s">
-        <div class="product-img">
-          <img src="bleach_product.svg" alt="PureForce Eco" style="filter:hue-rotate(100deg) drop-shadow(0 8px 24px rgba(0,180,216,0.3))"/>
-          <div class="product-badge" style="background:linear-gradient(135deg,#059669,#10b981)">ECO</div>
-        </div>
-        <div class="product-info">
-          <h3>PureForce Eco</h3>
-          <p>Check the container label for ingredients, approved uses, directions, and precautions.</p>
-          <div class="product-footer">
-            <div class="product-price">$11.49</div>
-            <button id="buy-eco" class="btn-buy">Add to Cart</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PRODUCT USE NOTE -->
-  <section id="testimonials">
-    <div class="testimonials-header fade-up">
-      <div class="section-tag">✦ Before You Use</div>
-      <h2 class="section-title">Follow the <span style="background:linear-gradient(135deg,#00f5ff,#00b4d8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">product label</span></h2>
-      <p class="section-sub">This website does not provide a substitute for the instructions, ingredient list, or safety information on the specific product container.</p>
-    </div>
-  </section>
-
-  <!-- TRAILER / VIDEO -->
-  <section id="trailer">
-    <div class="trailer-header fade-up">
-      <div class="section-tag">✦ Order Information</div>
-      <h2 class="section-title">How an order <span style="background:linear-gradient(135deg,#00f5ff,#00b4d8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">request</span> works</h2>
-      <p class="section-sub">Submitting the form sends an order request. Payment is not processed on this website.</p>
-    </div>
-
-    <div class="video-scene fade-up" id="video-scene">
-      <div class="video-thumbnail" id="video-thumbnail">
-        <div class="vt-particles" id="vt-particles"></div>
-
-        <!-- Animated step-by-step promo -->
-        <div class="promo-slides" id="promo-slides">
-          <div class="promo-slide active" id="slide-0">
-            <div class="slide-emoji">💧</div>
-            <div class="slide-step">STEP 1</div>
-            <div class="slide-heading">Choose a product</div>
-            <div class="slide-desc">Review the available options and the directions printed on each product label.</div>
-            <div class="slide-progress"><div class="slide-progress-fill"></div></div>
-          </div>
-          <div class="promo-slide" id="slide-1">
-            <div class="slide-emoji">⚗️</div>
-            <div class="slide-step">STEP 2</div>
-            <div class="slide-heading">Review your request</div>
-            <div class="slide-desc">Select your product and quantity, then enter your contact and delivery details.</div>
-            <div class="slide-progress"><div class="slide-progress-fill"></div></div>
-          </div>
-          <div class="promo-slide" id="slide-2">
-            <div class="slide-emoji">✨</div>
-            <div class="slide-step">STEP 3</div>
-            <div class="slide-heading">Submit the form</div>
-            <div class="slide-desc">Your request is sent to PureForce. No card details are collected on this page.</div>
-            <div class="slide-progress"><div class="slide-progress-fill"></div></div>
-          </div>
-          <div class="promo-slide" id="slide-3">
-            <div class="slide-emoji">🏆</div>
-            <div class="slide-step">NEXT</div>
-            <div class="slide-heading">Confirm payment</div>
-            <div class="slide-desc">PureForce will contact you to confirm payment and delivery after reviewing the request.</div>
-            <div class="slide-progress"><div class="slide-progress-fill"></div></div>
-          </div>
-        </div>
-
-        <!-- Slide navigation dots -->
-        <div class="slide-dots">
-          <span class="slide-dot active" data-idx="0"></span>
-          <span class="slide-dot" data-idx="1"></span>
-          <span class="slide-dot" data-idx="2"></span>
-          <span class="slide-dot" data-idx="3"></span>
-        </div>
-
-        <!-- Corner branding -->
-        <div class="promo-brand-corner">PureForce™</div>
-      </div>
-
-      <!-- Watch on YouTube bar -->
-      <div class="video-cta-bar">
-        <span class="vcta-label">Read the product directions before use</span>
-        <a id="watch-yt-btn"
-           href="#how-it-works"
-           
-           class="btn-watch-yt">
-          Read use guidance
-        </a>
-      </div>
-    </div>
-
-    <!-- Order request summary -->
-    <div class="trailer-strip fade-up">
-      <div class="ts-item"><div class="ts-num">1</div><div class="ts-label">Choose a product</div></div>
-      <div class="ts-item"><div class="ts-num">2</div><div class="ts-label">Submit your request</div></div>
-      <div class="ts-item"><div class="ts-num">3</div><div class="ts-label">Confirm payment</div></div>
-    </div>
-  </section>
-
-  <!-- CTA BANNER -->
-  <section id="cta">
-    <div class="section-tag" style="margin:0 auto 20px">✦ Order Request</div>
-    <h2 class="section-title fade-up">Ready to send<br/><span style="background:linear-gradient(135deg,#00f5ff,#00b4d8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">an order</span><br/>request?</h2>
-    <p class="section-sub fade-up">Submit your details and PureForce will contact you to confirm payment and delivery.</p>
-    <div class="cta-actions fade-up">
-      <a id="cta-shop-btn" href="#checkout" class="btn-primary" style="font-size:1.1rem;padding:18px 44px;">🛒 Order Now</a>
-      <a id="cta-learn-btn" href="#features" class="btn-secondary" style="font-size:1.1rem;padding:18px 44px;">Learn More</a>
-    </div>
-  </section>
-
-  <!-- CHECKOUT FORM -->
-  <section id="checkout">
-    <div class="checkout-inner">
-      <div class="checkout-header fade-up">
-        <div class="section-tag" style="margin:0 auto 16px">✦ Order Request</div>
-        <h2 class="section-title">Complete Your <span style="background:linear-gradient(135deg,#00f5ff,#00b4d8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Order</span></h2>
-        <p class="section-sub">Submit your order details. We’ll contact you to confirm payment and delivery.</p>
-      </div>
-
-      <form class="checkout-form fade-up" id="checkout-form" novalidate>
-
-        <!-- Product Selection -->
-        <div class="form-section-label">Choose Your Product</div>
-        <div class="product-selector" id="product-selector">
-          <label class="ps-item active" id="ps-original">
-            <input type="radio" name="product" value="original" checked />
-            <div class="ps-name">PureForce Original</div>
-            <div class="ps-price">$8.99</div>
-          </label>
-          <label class="ps-item" id="ps-ultra">
-            <input type="radio" name="product" value="ultra" />
-            <div class="ps-name">PureForce Ultra</div>
-            <div class="ps-price">$14.99</div>
-          </label>
-          <label class="ps-item" id="ps-eco">
-            <input type="radio" name="product" value="eco" />
-            <div class="ps-name">PureForce Eco</div>
-            <div class="ps-price">$11.49</div>
-          </label>
-        </div>
-
-        <!-- Personal Info -->
+<header class="site-header"><nav id="navbar" aria-label="Main navigation"><a class="nav-logo" href="#home">PureForce</a><ul class="nav-links"><li><a href="#products">Products</a></li><li><a href="#features">How it works</a></li></ul><a class="button nav-cta" href="#checkout">Order Now</a></nav></header>
+<div id="account-controls"></div>
+<main>
+<section class="hero" id="home">
+<div class="hero-content"><p class="eyebrow reveal">✦ &nbsp; PUREFORCE PRODUCT RANGE</p><h1 class="reveal" style="--delay:.1s">The Power of<em>Pure Clean.</em></h1><p class="hero-copy reveal" style="--delay:.2s">Explore the PureForce range. Check each product label for approved uses, directions, and safety information before use.</p><div class="hero-actions reveal" style="--delay:.3s"><a id="hero-shop-btn" href="#products" class="button">Shop Now</a><a id="hero-learn-btn" href="#features" class="button button-secondary">Learn How It Works →</a></div></div>
+<img id="hero-product-img" class="hero-image reveal" style="--delay:.2s" src="assets/hero-campaign.jpg" alt="PureForce bleach bottle on a stone plinth" fetchpriority="high"/>
+</section>
+<section id="features" class="content-section" aria-labelledby="information-title"><p class="eyebrow">✦ &nbsp; PRODUCT INFORMATION</p><h2 id="information-title" class="section-title">Choose with care</h2><p class="section-sub">Always follow the directions and safety information printed on the specific product container.</p><div class="features-grid">
+<article class="feature-card"><h3>Compare the range</h3><p>Explore Original, Ultra, and Eco options.</p></article>
+<article class="feature-card"><h3>Read the product label</h3><p>Check approved uses, ingredients, and precautions.</p></article>
+<article class="feature-card"><h3>Check compatibility</h3><p>Use only on surfaces listed on the label.</p></article></div></section>
+<section id="products" class="content-section" aria-labelledby="products-title"><p class="eyebrow">✦ &nbsp; OUR RANGE</p><h2 id="products-title" class="section-title">Find Your Perfect Match</h2><p class="section-sub">Check each container for its intended use and directions.</p><div class="products-grid">
+<article class="product-card" id="product-original"><img class="product-img" src="assets/product-original.jpg" alt="PureForce Original bottle" loading="lazy"/><div class="product-info"><p class="product-badge">ORIGINAL</p><h3>PureForce Original</h3><p>Follow the directions printed on the container.</p><div class="product-footer"><span class="product-price">$8.99</span><button type="button" id="buy-original" class="btn-buy" data-product="original">Add to Cart</button></div></div></article><article class="product-card" id="product-ultra"><img class="product-img" src="assets/product-ultra.jpg" alt="PureForce Ultra bottle" loading="lazy"/><div class="product-info"><p class="product-badge">ULTRA</p><h3>PureForce Ultra</h3><p>Follow the directions printed on the container.</p><div class="product-footer"><span class="product-price">$14.99</span><button type="button" id="buy-ultra" class="btn-buy" data-product="ultra">Add to Cart</button></div></div></article><article class="product-card" id="product-eco"><img class="product-img" src="assets/product-eco.jpg" alt="PureForce Eco bottle" loading="lazy"/><div class="product-info"><p class="product-badge">ECO</p><h3>PureForce Eco</h3><p>Follow the directions printed on the container.</p><div class="product-footer"><span class="product-price">$11.49</span><button type="button" id="buy-eco" class="btn-buy" data-product="eco">Add to Cart</button></div></div></article>
+</div></section>
+<section id="checkout" class="content-section" aria-labelledby="checkout-title"><p class="eyebrow">✦ &nbsp; ORDER REQUEST</p><h2 id="checkout-title" class="section-title">Complete Your Order</h2><p class="section-sub">Submit your details. Payment and delivery are confirmed separately.</p>
+<form id="checkout-form" novalidate><div class="form-section-label">CHOOSE YOUR PRODUCT</div><div class="product-selector" id="product-selector">
+<label class="ps-item active" id="ps-original"><input type="radio" name="product" value="original" checked/><span class="ps-top"><span class="ps-name">PureForce Original</span><span>$8.99</span></span><span class="ps-detail">PureForce Original · $8.99</span></label><label class="ps-item" id="ps-ultra"><input type="radio" name="product" value="ultra" /><span class="ps-top"><span class="ps-name">PureForce Ultra</span><span>$14.99</span></span><span class="ps-detail">PureForce Ultra · $14.99</span></label><label class="ps-item" id="ps-eco"><input type="radio" name="product" value="eco" /><span class="ps-top"><span class="ps-name">PureForce Eco</span><span>$11.49</span></span><span class="ps-detail">PureForce Eco · $11.49</span></label>
+</div><div class="checkout-actions"><p>No card details are collected on this page. Follow product-label instructions.</p><button class="button" type="button" id="open-order-details">Submit Order</button></div>
+<dialog id="order-details" aria-labelledby="details-title"><div class="dialog-header"><h2 id="details-title">Your order details</h2><button type="button" id="close-order-details" class="close-dialog" aria-label="Close order details">×</button></div>        <!-- Personal Info -->
         <div class="form-section-label" style="margin-top:8px">Your Information</div>
         <div class="form-row">
           <div class="form-group">
             <label for="cf-firstname">First Name</label>
-            <input type="text" id="cf-firstname" placeholder="e.g. Amaka" required />
+            <input type="text" id="cf-firstname" autocomplete="given-name" placeholder="First name" required />
           </div>
           <div class="form-group">
             <label for="cf-lastname">Last Name</label>
-            <input type="text" id="cf-lastname" placeholder="e.g. Thompson" required />
+            <input type="text" id="cf-lastname" autocomplete="family-name" placeholder="Last name" required />
           </div>
         </div>
         <div class="form-row single">
           <div class="form-group">
             <label for="cf-email">Email Address</label>
-            <input type="email" id="cf-email" placeholder="youremail@example.com" required />
+            <input type="email" id="cf-email" autocomplete="email" placeholder="you@example.com" required />
           </div>
         </div>
         <div class="form-row single" style="margin-bottom:16px">
           <div class="form-group">
             <label for="cf-address">Shipping Address</label>
-            <input type="text" id="cf-address" placeholder="123 Main St, City, Country" required />
+            <input type="text" id="cf-address" autocomplete="street-address" placeholder="Street, city, country" required />
           </div>
         </div>
         <div class="form-row">
           <div class="form-group">
             <label for="cf-phone">Phone Number</label>
-            <input type="tel" id="cf-phone" placeholder="+234 800 000 0000" required />
+            <input type="tel" id="cf-phone" autocomplete="tel" placeholder="Phone number" required />
           </div>
           <div class="form-group">
             <label for="cf-qty">Quantity</label>
@@ -1154,197 +156,28 @@
           </div>
         </div>
 
-        <!-- Payment will be arranged after order confirmation -->
-        <div class="form-section-label" style="margin-top:8px">Payment</div>
-        <p class="section-sub" style="margin:0 0 18px">We’ll contact you to confirm payment and delivery. Do not enter card details here.</p>
-
-        <!-- Order Total -->
-        <div class="checkout-total">
-          <div class="total-label">Estimated Total</div>
-          <div class="total-amount" id="order-total">$8.99</div>
-        </div>
-
-        <button type="submit" class="btn-checkout" id="checkout-submit">
-          Submit Order
-        </button>
-
-        <p class="section-sub" style="text-align:center;margin-top:14px">Your name, email, phone, address, and order details are sent to process this request. No card details are collected here. Payment is arranged after confirmation.</p>
-      </form>
-    </div>
-  </section>
-
-  <!-- Toast notification -->
-  <div class="toast" id="order-toast">✅ Order request received. We’ll contact you to confirm payment and delivery.</div>
-
-  <!-- FOOTER -->
-  <footer>
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <div class="nav-logo">PureForce</div>
-        <p>Explore PureForce products and submit an order request online.</p>
-      </div>
-      <div class="footer-col">
-        <h4>Products</h4>
-        <ul>
-          <li><a href="#products">PureForce Original</a></li>
-          <li><a href="#products">PureForce Ultra</a></li>
-          <li><a href="#products">PureForce Eco</a></li>
-          <li><a href="#products">Bundle Deals</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Explore</h4>
-        <ul>
-          <li><a href="#home">Home</a></li>
-          <li><a href="#features">Product information</a></li>
-          <li><a href="#how-it-works">Use guidance</a></li>
-          <li><a href="#products">Products</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Orders</h4>
-        <ul>
-          <li><a href="#checkout">Place an order request</a></li>
-          <li><a href="login.html">Sign in</a></li>
-          <li><a href="#testimonials">Before you use</a></li>
-          <li><a href="#trailer">How orders work</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <p>© 2026 PureForce Bleach. All rights reserved.</p>
-      <p>Order requests are not payments. Follow the directions on the product label.</p>
-    </div>
-  </footer>
-
-  <script>
-    // ── TRAILER VIDEO ──
-    (function() {
-      // Spawn floating particles inside the thumbnail
-      const vtContainer = document.getElementById('vt-particles');
-      for (let i = 0; i < 24; i++) {
-        const p = document.createElement('div');
-        p.classList.add('vt-particle');
-        const size = Math.random() * 6 + 2;
-        p.style.cssText = `
-          width:${size}px; height:${size}px;
-          left:${Math.random()*100}%;
-          animation-duration:${Math.random()*10+6}s;
-          animation-delay:${Math.random()*10}s;
-        `;
-        vtContainer.appendChild(p);
-      }
-
-      // Slideshow logic
-      const slides = document.querySelectorAll('.promo-slide');
-      const dots = document.querySelectorAll('.slide-dot');
-      let currentSlide = 0;
-      let slideInterval;
-
-      function showSlide(index) {
-        slides.forEach(s => s.classList.remove('active'));
-        dots.forEach(d => d.classList.remove('active'));
-        slides[index].classList.add('active');
-        dots[index].classList.add('active');
-        currentSlide = index;
-      }
-
-      function nextSlide() {
-        showSlide((currentSlide + 1) % slides.length);
-      }
-
-      function startSlideshow() {
-        if (slideInterval) clearInterval(slideInterval);
-        slideInterval = setInterval(nextSlide, 4000);
-      }
-
-      // Initial start
-      startSlideshow();
-
-      // Dot clicks
-      dots.forEach(dot => {
-        dot.addEventListener('click', () => {
-          const idx = parseInt(dot.getAttribute('data-idx'));
-          showSlide(idx);
-          startSlideshow(); // Reset timer
-        });
-      });
-    })();
-
-    // Floating bubbles
-    const bubblesEl = document.getElementById('bubbles');
-    for (let i = 0; i < 18; i++) {
-      const b = document.createElement('div');
-      b.classList.add('bubble');
-      const size = Math.random() * 60 + 10;
-      b.style.cssText = `
-        width:${size}px; height:${size}px;
-        left:${Math.random()*100}%;
-        animation-duration:${Math.random()*12+8}s;
-        animation-delay:${Math.random()*12}s;
-      `;
-      bubblesEl.appendChild(b);
-    }
-
-    // Intersection Observer for fade-up
-    const obs = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
-    }, { threshold: 0.12 });
-    document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
-
-    // Add to cart feedback
-    document.querySelectorAll('.btn-buy').forEach(btn => {
-      btn.addEventListener('click', function() {
-        const orig = this.textContent;
-        this.textContent = '✓ Added!';
-        this.style.background = 'linear-gradient(135deg,#059669,#10b981)';
-        document.getElementById('checkout').scrollIntoView({behavior:'smooth'});
-        setTimeout(() => {
-          this.textContent = orig;
-          this.style.background = '';
-        }, 1800);
-      });
-    });
-
-    // Navbar scroll effect
-    window.addEventListener('scroll', () => {
-      const nav = document.getElementById('navbar');
-      nav.style.backdropFilter = window.scrollY > 60 ? 'blur(24px)' : 'blur(18px)';
-      nav.style.background = window.scrollY > 60 ? 'rgba(3,7,18,0.92)' : 'rgba(3,7,18,0.7)';
-    });
-
-    // ── CHECKOUT LOGIC ──
-    const prices = { original: 8.99, ultra: 14.99, eco: 11.49 };
-    const discounts = { 1: 0, 2: 0.05, 3: 0.10, 6: 0.15 };
-    let selectedProduct = 'original';
-
-    function updateTotal() {
-      const qty = parseInt(document.getElementById('cf-qty').value);
-      const base = prices[selectedProduct];
-      const disc = discounts[qty] || 0;
-      const total = (base * qty * (1 - disc)).toFixed(2);
-      document.getElementById('order-total').textContent = '$' + total;
-    }
-
-    // Product selector
-    document.querySelectorAll('.ps-item').forEach(item => {
-      item.addEventListener('click', () => {
-        document.querySelectorAll('.ps-item').forEach(i => i.classList.remove('active'));
-        item.classList.add('active');
-        selectedProduct = item.querySelector('input').value;
-        updateTotal();
-      });
-    });
-
-    // Qty change    // Qty change
-    document.getElementById('cf-qty').addEventListener('change', updateTotal);
-
-  </script>
+<div class="checkout-total"><span>Estimated Total</span><span class="total-amount" id="order-total">$8.99</span></div><p class="dialog-note" style="margin-bottom:16px">We'll contact you to confirm payment and delivery. No card details are collected here.</p><button class="btn-checkout" type="submit" id="checkout-submit">Submit Order</button><p class="dialog-note">Your name, email, phone, address, and order details are sent to process this request.</p></dialog>
+</form><p class="copyright">© 2026 PureForce Bleach · Order requests are not payments.</p></section>
+</main><div class="toast" id="order-toast" role="status">Order request received. We'll contact you to confirm payment and delivery.</div>
+<script>
+const prices={original:8.99,ultra:14.99,eco:11.49};
+const discounts={1:0,2:.05,3:.10,6:.15};
+let selectedProduct='original';
+function updateTotal(){const qty=Number(document.getElementById('cf-qty').value);document.getElementById('order-total').textContent='$'+(prices[selectedProduct]*qty*(1-(discounts[qty]||0))).toFixed(2);}
+function selectProduct(value){selectedProduct=value;document.querySelectorAll('.ps-item').forEach(item=>{const input=item.querySelector('input');input.checked=input.value===value;item.classList.toggle('active',input.checked);});updateTotal();}
+document.querySelectorAll('input[name="product"]').forEach(input=>input.addEventListener('change',()=>selectProduct(input.value)));
+document.querySelectorAll('.btn-buy').forEach(button=>button.addEventListener('click',()=>{selectProduct(button.dataset.product);document.getElementById('checkout').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});}));
+document.getElementById('cf-qty').addEventListener('change',updateTotal);
+const orderDialog=document.getElementById('order-details');
+document.getElementById('open-order-details').addEventListener('click',()=>orderDialog.showModal());
+document.getElementById('close-order-details').addEventListener('click',()=>orderDialog.close());
+orderDialog.addEventListener('click',event=>{if(event.target===orderDialog){const r=orderDialog.getBoundingClientRect();if(event.clientX<r.left||event.clientX>r.right||event.clientY<r.top||event.clientY>r.bottom)orderDialog.close();}});
+</script>
 <!-- Floating AI Chat Widget -->
 <div id="ai-chat-widget" style="position:fixed; bottom:20px; right:20px; z-index:9999;">
-  <button id="ai-chat-btn" style="background:#00f5ff; border:none; width:60px; height:60px; border-radius:50%; cursor:pointer; box-shadow:0 8px 24px rgba(0,245,255,0.4); font-size:1.8rem; display:flex; justify-content:center; align-items:center; transition: transform 0.2s;">💬</button>
+  <button id="ai-chat-btn" style="background:#a78bfa; border:none; width:60px; height:60px; border-radius:50%; cursor:pointer; box-shadow:0 8px 24px rgba(0,245,255,0.4); font-size:1.8rem; display:flex; justify-content:center; align-items:center; transition: transform 0.2s;">💬</button>
   <div id="ai-chat-box" style="display:none; width:320px; height:400px; background:#0d1117; border:1px solid rgba(0,245,255,0.3); border-radius:12px; position:absolute; bottom:80px; right:0; flex-direction:column; overflow:hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
-    <div style="background:#0077b6; padding:15px; font-weight:bold; color:white; display:flex; justify-content:space-between; align-items:center;">
+    <div style="background:#8b72dd; padding:15px; font-weight:bold; color:white; display:flex; justify-content:space-between; align-items:center;">
       <span>PureForce Assistant</span>
       <span id="ai-chat-close" style="cursor:pointer;">✖</span>
     </div>
@@ -1353,16 +186,16 @@
     </div>
     <div style="display:flex; border-top:1px solid #333;">
       <input id="ai-chat-input" type="text" placeholder="Ask about PureForce Bleach..." style="flex:1; border:none; padding:15px; background:#1b2330; color:white; outline:none; font-family: 'Inter', sans-serif;" />
-      <button id="ai-chat-send" style="background:#00f5ff; color:#005f73; font-weight:bold; border:none; padding:0 20px; cursor:pointer;">Send</button>
+      <button id="ai-chat-send" style="background:#a78bfa; color:#005f73; font-weight:bold; border:none; padding:0 20px; cursor:pointer;">Send</button>
     </div>
   </div>
 </div>
 <!-- Order History Modal -->
 <div id="orders-modal" style="display:none; position:fixed; inset:0; background:rgba(3,7,18,0.85); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); z-index:10000; justify-content:center; align-items:center; padding:20px;">
   <div style="background:#0d1117; border:1px solid rgba(0,245,255,0.25); border-radius:20px; width:100%; max-width:600px; max-height:80vh; display:flex; flex-direction:column; overflow:hidden; box-shadow:0 24px 64px rgba(0,0,0,0.5);">
-    <div style="background:linear-gradient(135deg,#0077b6,#00b4d8); padding:20px; display:flex; justify-content:space-between; align-items:center; color:white; border-bottom:1px solid rgba(0,245,255,0.2);">
+    <div style="background:linear-gradient(135deg,#8b72dd,#c7b5ff); padding:20px; display:flex; justify-content:space-between; align-items:center; color:white; border-bottom:1px solid rgba(0,245,255,0.2);">
       <h2 style="font-family:'Outfit', sans-serif; font-size:1.4rem; margin:0; display:flex; align-items:center; gap:10px;">🛒 My Order History</h2>
-      <span id="orders-modal-close" style="cursor:pointer; font-size:1.2rem; font-weight:bold; transition:color 0.2s;" onmouseover="this.style.color='#00f5ff'" onmouseout="this.style.color='white'">✖</span>
+      <span id="orders-modal-close" style="cursor:pointer; font-size:1.2rem; font-weight:bold; transition:color 0.2s;" onmouseover="this.style.color='#a78bfa'" onmouseout="this.style.color='white'">✖</span>
     </div>
     <div id="orders-modal-content" style="flex:1; padding:24px; overflow-y:auto; color:#e0e0e0; font-family:'Inter', sans-serif;">
       <div style="text-align:center; padding:40px; color:#94a3b8;">Loading orders...</div>
@@ -1404,7 +237,7 @@
       // Add logout & orders button with user email
       const logoutBtn = document.createElement('div');
       logoutBtn.style.cssText = `
-        position: fixed; top: 16px; right: 20px; z-index: 9999;
+        position: relative;
         display: flex; align-items: center; gap: 10px;
         background: rgba(0,0,0,0.6); backdrop-filter: blur(10px);
         border: 1px solid rgba(255,255,255,0.1);
@@ -1421,12 +254,12 @@
           transition: background 0.2s;
         " onmouseover="this.style.background='rgba(255,255,255,0.2)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'">My Orders</button>
         <button id="logout-btn" style="
-          background: linear-gradient(135deg,#0077b6,#00b4d8);
+          background: linear-gradient(135deg,#8b72dd,#c7b5ff);
           border: none; color: white; padding: 4px 12px;
           border-radius: 20px; cursor: pointer; font-size: 0.78rem; font-weight: 600;
         ">Logout</button>
       `;
-      document.body.appendChild(logoutBtn);
+      document.getElementById('account-controls').appendChild(logoutBtn);
       document.getElementById('logout-btn').addEventListener('click', () => { localStorage.removeItem('access_token'); signOut(auth).then(() => window.location.href = 'login.html'); });
       document.getElementById('orders-btn').addEventListener('click', openOrdersModal);
     }
@@ -1578,6 +411,7 @@
 
       btn.textContent = '✅ Request Received';
       btn.style.background = 'linear-gradient(135deg,#059669,#10b981)';
+      document.getElementById('order-details').close();
       const toast = document.getElementById('order-toast');
       toast.classList.add('show');
       setTimeout(() => toast.classList.remove('show'), 4500);
