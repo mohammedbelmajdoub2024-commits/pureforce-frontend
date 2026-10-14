@@ -96,7 +96,7 @@
   import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js';
   import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js';
   const firebaseConfig={apiKey:'AIzaSyAcCydEXn6GeAu9gN3AI1CcINfnIR9siNY',authDomain:'pureforce-bleach.firebaseapp.com',projectId:'pureforce-bleach',storageBucket:'pureforce-bleach.firebasestorage.app',messagingSenderId:'409756547445',appId:'1:409756547445:web:79a645200e430a734a3b3c'};
-  const API_BASE_URL=window.PUREFORCE_ADMIN_API_URL||'https://pureforcebackend1-337eu9y9.b4a.run';
+  const API_BASE_URL=window.PUREFORCE_ADMIN_API_URL||'https://pureforcebackend1-ghs2woj2.b4a.run';
   const app=initializeApp(firebaseConfig),auth=getAuth(app),banner=document.getElementById('banner');let currentUser=null;
   const showBanner=(m)=>{banner.textContent=m;banner.classList.add('show')};
   const hideBanner=()=>banner.classList.remove('show');
