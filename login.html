@@ -321,7 +321,7 @@
 const userCredential = await signInWithEmailAndPassword(auth, email, password);
 
 // Keep the API account in sync with Firebase. Older accounts may exist only in Firebase.
-const apiUrl = 'https://pureforcebackend1-337eu9y9.b4a.run';
+const apiUrl = 'https://pureforcebackend1-ghs2woj2.b4a.run';
 let response = await fetch(`${apiUrl}/login`, {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
@@ -363,7 +363,7 @@ window.location.replace('index.html');
       } catch (err) {
         await signOut(auth).catch(() => {});
         localStorage.removeItem('access_token');
-        showError(`❌ ${err.message}`);
+        showError(err instanceof TypeError ? 'The storefront service is unavailable. Please try again shortly.' : `❌ ${err.message}`);
       } finally {
         submitBtn.disabled = false;
         submitBtn.textContent = originalText;
