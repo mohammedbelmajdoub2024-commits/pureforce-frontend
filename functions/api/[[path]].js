@@ -34,7 +34,9 @@ export async function onRequest({ request, params }) {
         'Cache-Control': 'no-store'
       }
     });
-  } catch {
+  } catch (error) {
+    console.error('API upstream connection failed', error.name, error.message);
+    if (path === 'health') return json(503, 'Upstream connection failed: ' + error.message);
     return json(503, 'The storefront service is temporarily unavailable');
   }
 }
