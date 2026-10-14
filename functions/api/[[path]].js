@@ -19,7 +19,7 @@ export async function onRequest({ request, params }) {
     const value = request.headers.get(name);
     if (value) headers.set(name, value);
   }
-  const options = { method, headers, redirect: 'error', signal: AbortSignal.timeout(30000) };
+  const options = { method, headers, redirect: 'manual', signal: AbortSignal.timeout(30000) };
   if (method === 'POST') {
     const body = await request.arrayBuffer();
     if (body.byteLength > 65536) return json(413, 'Request is too large');
@@ -27,6 +27,7 @@ export async function onRequest({ request, params }) {
   }
   try {
     const upstream = await fetch(BACKEND + '/' + path, options);
+    if (upstream.status >= 300 && upstream.status < 400) return json(502, 'Unexpected upstream redirect');
     return new Response(upstream.body, {
       status: upstream.status,
       headers: {
@@ -35,8 +36,7 @@ export async function onRequest({ request, params }) {
       }
     });
   } catch (error) {
-    console.error('API upstream connection failed', error.name, error.message);
-    if (path === 'health') return json(503, 'Upstream connection failed: ' + error.message);
+    console.error('API upstream connection failed', error.name);
     return json(503, 'The storefront service is temporarily unavailable');
   }
 }
