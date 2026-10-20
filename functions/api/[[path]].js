@@ -1,4 +1,4 @@
-const BACKEND = 'https://pureforcebackend1-ghs2woj2.b4a.run';
+const BACKEND = 'https://pureforcebackend1-8dmdma20.b4a.run';
 const ROUTES = new Map([
   ['health', 'GET'], ['login', 'POST'], ['register', 'POST'],
   ['generate', 'POST'], ['order', 'POST'], ['orders', 'GET'],
